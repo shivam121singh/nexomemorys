@@ -1,6 +1,5 @@
 // Base URL for the Express API
-const API_BASE_URL = 'http://localhost:5000/api';
-
+const API_BASE_URL = 'https://nexomemorys-backend.onrender.com';
 const LoreAPI = {
   // Fetch all stored memories
   async fetchMemories() {
