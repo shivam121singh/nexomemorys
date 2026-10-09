@@ -1,0 +1,3071 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>OUR LORE — The Story of Us</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@600;700&family=Plus+Jakarta+Sans:ital,wght@0,400;0,600;0,800;1,400&family=Syne:wght@700;800;900&family=VT323&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+  <style>
+  @import url('https://fonts.googleapis.com/css2?family=Caveat:wght@600;700&family=Plus+Jakarta+Sans:ital,wght@0,400;0,600;0,800;1,400&family=Syne:wght@700;800;900&family=VT323&display=swap');
+
+/* ==========================================================================
+   CSS CUSTOM PROPERTIES (THEMING SYSTEM)
+   ========================================================================== */
+:root {
+  --bg: #faf7f2;
+  --bg-alt: #f3ede2;
+  --card-bg: #ffffff;
+  --text: #17171e;
+  --text-muted: #646477;
+  --pink: #ff5e97;
+  --pink-soft: #ffe4ee;
+  --lavender: #b18cfe;
+  --lavender-soft: #ede6ff;
+  --lime: #ccff00;
+  --electric-purple: #7000ff;
+  --neon-cyan: #00f0ff;
+  --border-color: #17171e;
+  --shadow-offset: 5px;
+  --brutal-shadow: 5px 5px 0px var(--border-color);
+  --brutal-shadow-hover: 7px 7px 0px var(--border-color);
+  --brutal-shadow-sm: 3px 3px 0px var(--border-color);
+  --font-display: 'Syne', sans-serif;
+  --font-hand: 'Caveat', cursive;
+  --font-body: 'Plus Jakarta Sans', sans-serif;
+  --font-mono: 'VT323', monospace;
+  --film-grain: radial-gradient(circle, rgba(0, 0, 0, 0.03) 1px, transparent 1px);
+}
+
+[data-theme="dark"] {
+  --bg: #121118;
+  --bg-alt: #1a1824;
+  --card-bg: #222030;
+  --text: #f5f4fb;
+  --text-muted: #a6a3be;
+  --pink: #ff4785;
+  --pink-soft: #381928;
+  --lavender: #c09dff;
+  --lavender-soft: #271f3d;
+  --lime: #d4ff33;
+  --electric-purple: #9d4edd;
+  --border-color: #f5f4fb;
+  --brutal-shadow: 5px 5px 0px #000000;
+  --brutal-shadow-hover: 7px 7px 0px #000000;
+  --brutal-shadow-sm: 3px 3px 0px #000000;
+  --film-grain: radial-gradient(circle, rgba(255, 255, 255, 0.04) 1px, transparent 1px);
+}
+
+/* ==========================================================================
+   RESET & BULLETPROOF ROOT DEFAULTS
+   ========================================================================== */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+html {
+  scroll-behavior: smooth;
+  overflow-x: hidden;
+  width: 100%;
+}
+
+body {
+  background-color: var(--bg);
+  color: var(--text);
+  font-family: var(--font-body);
+  min-height: 100vh;
+  width: 100%;
+  overflow-x: hidden;
+  position: relative;
+  transition: background-color 0.3s ease, color 0.3s ease;
+  cursor: default;
+}
+
+/* Film grain background overlay */
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background-size: 8px 8px;
+  background-image: var(--film-grain);
+  pointer-events: none;
+  z-index: 9998;
+  opacity: 0.8;
+}
+
+img, video {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
+/* Custom Desktop Cursor */
+@media (hover: hover) and (pointer: fine) {
+  body {
+    cursor: none;
+  }
+  .custom-cursor,
+  .cursor-dot {
+    position: fixed;
+    pointer-events: none;
+    z-index: 100000;
+    transform: translate(-50%, -50%);
+    transition: transform 0.1s ease, width 0.2s, height 0.2s, background-color 0.2s;
+  }
+  .custom-cursor {
+    width: 32px;
+    height: 32px;
+    border: 2px solid var(--text);
+    border-radius: 50%;
+    backdrop-filter: invert(0.2);
+  }
+  .cursor-dot {
+    width: 8px;
+    height: 8px;
+    background: var(--pink);
+    border-radius: 50%;
+  }
+  .cursor-hover {
+    transform: translate(-50%, -50%) scale(1.6);
+    background: rgba(204, 255, 0, 0.4);
+    border-color: var(--electric-purple);
+  }
+}
+
+/* ==========================================================================
+   Y2K NEOBRUTALIST BUTTONS & BADGES
+   ========================================================================== */
+.btn-y2k {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  font-family: var(--font-display);
+  font-weight: 800;
+  text-transform: uppercase;
+  font-size: clamp(0.78rem, 2vw, 0.9rem);
+  letter-spacing: 0.5px;
+  padding: 0.75rem 1.3rem;
+  border: 2px solid var(--border-color);
+  border-radius: 12px;
+  background: var(--lime);
+  color: #17171e;
+  box-shadow: var(--brutal-shadow);
+  cursor: pointer;
+  transition: all 0.15s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  text-decoration: none;
+  user-select: none;
+  white-space: nowrap;
+}
+
+.btn-y2k:hover {
+  transform: translate(-2px, -2px);
+  box-shadow: var(--brutal-shadow-hover);
+}
+
+.btn-y2k:active {
+  transform: translate(2px, 2px);
+  box-shadow: 2px 2px 0px var(--border-color);
+}
+
+.btn-pink { background: var(--pink); color: #fff; }
+.btn-lavender { background: var(--lavender); color: #17171e; }
+.btn-white { background: var(--card-bg); color: var(--text); }
+.btn-lime { background: var(--lime); color: #17171e; }
+
+/* Scrapbook Stickers & Tape */
+.sticker-badge {
+  display: inline-block;
+  font-family: var(--font-hand);
+  font-size: clamp(1rem, 2.5vw, 1.25rem);
+  font-weight: 700;
+  padding: 0.3rem 0.8rem;
+  background: var(--lime);
+  color: #121118;
+  border: 2px solid #121118;
+  border-radius: 20px;
+  box-shadow: 3px 3px 0 #121118;
+  transform: rotate(-3deg);
+}
+
+.tape {
+  position: absolute;
+  width: clamp(65px, 12vw, 90px);
+  height: clamp(18px, 3.5vw, 24px);
+  background: rgba(255, 235, 150, 0.75);
+  border: 1px dashed rgba(0, 0, 0, 0.2);
+  z-index: 5;
+  pointer-events: none;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+.tape-top-center {
+  top: -10px;
+  left: 50%;
+  transform: translateX(-50%) rotate(2deg);
+}
+
+.tape-top-left {
+  top: -8px;
+  left: -8px;
+  transform: rotate(-25deg);
+}
+
+/* Polaroid Card Component */
+.polaroid-card {
+  background: #ffffff;
+  padding: 10px 10px 20px 10px;
+  border: 2px solid var(--border-color);
+  box-shadow: var(--brutal-shadow);
+  border-radius: 4px;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  position: relative;
+  width: 100%;
+  max-width: 380px;
+  margin: 0 auto;
+}
+
+[data-theme="dark"] .polaroid-card {
+  background: #252233;
+}
+
+.polaroid-card img,
+.polaroid-card video {
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  object-fit: cover;
+  border: 1px solid rgba(0, 0, 0, 0.12);
+  display: block;
+  border-radius: 2px;
+  filter: contrast(1.05) saturate(1.1);
+  background: #000;
+}
+
+.polaroid-card .polaroid-caption {
+  font-family: var(--font-hand);
+  font-size: clamp(1.15rem, 2.5vw, 1.35rem);
+  color: var(--text);
+  text-align: center;
+  margin-top: 10px;
+  line-height: 1.2;
+}
+
+/* ==========================================================================
+   HEADER & NAVIGATION
+   ========================================================================== */
+header.site-header {
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  background: var(--bg);
+  border-bottom: 2px solid var(--border-color);
+  backdrop-filter: blur(10px);
+  width: 100%;
+}
+
+.nav-container {
+  width: 100%;
+  max-width: 1300px;
+  margin: 0 auto;
+  padding: 0.75rem 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem;
+}
+
+.brand-logo {
+  font-family: var(--font-display);
+  font-weight: 900;
+  font-size: clamp(1.2rem, 3.5vw, 1.55rem);
+  letter-spacing: -0.5px;
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  cursor: pointer;
+  user-select: none;
+  white-space: nowrap;
+}
+
+.brand-logo span.dot {
+  width: 10px;
+  height: 10px;
+  background: var(--pink);
+  border-radius: 50%;
+  border: 2px solid var(--border-color);
+  display: inline-block;
+  animation: pulse 1.5s infinite;
+}
+
+.nav-menu {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  list-style: none;
+  overflow-x: auto;
+  padding-bottom: 2px;
+}
+
+.nav-link {
+  background: transparent;
+  border: 2px solid transparent;
+  padding: 0.45rem 0.75rem;
+  font-family: var(--font-display);
+  font-weight: 800;
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  color: var(--text);
+  cursor: pointer;
+  border-radius: 8px;
+  white-space: nowrap;
+  transition: all 0.2s ease;
+}
+
+.nav-link:hover,
+.nav-link.active {
+  border-color: var(--border-color);
+  background: var(--lavender-soft);
+  transform: translateY(-2px);
+  box-shadow: 2px 2px 0 var(--border-color);
+}
+
+.nav-link.active {
+  background: var(--pink);
+  color: #ffffff;
+}
+
+.nav-tools {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.icon-btn {
+  background: var(--card-bg);
+  border: 2px solid var(--border-color);
+  width: 38px;
+  height: 38px;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.95rem;
+  cursor: pointer;
+  box-shadow: 3px 3px 0 var(--border-color);
+  transition: transform 0.15s;
+  color: var(--text);
+  flex-shrink: 0;
+}
+
+.icon-btn:hover {
+  transform: translate(-2px, -2px);
+}
+
+.mobile-menu-btn {
+  display: none;
+}
+
+.mobile-menu-drawer {
+  position: fixed;
+  top: 61px;
+  left: 0;
+  right: 0;
+  background: var(--bg);
+  border-bottom: 3px solid var(--border-color);
+  padding: 1.25rem 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+  z-index: 9999;
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.2);
+}
+
+.mobile-menu-drawer .nav-link {
+  width: 100%;
+  text-align: center;
+  padding: 0.8rem;
+  font-size: 1rem;
+}
+
+/* ==========================================================================
+   APP CONTAINER & SECTIONS
+   ========================================================================== */
+main#app-container {
+  min-height: calc(100vh - 65px);
+  width: 100%;
+  overflow-x: hidden;
+}
+
+.site-section {
+  display: none;
+  padding: clamp(1.5rem, 4vw, 3rem) clamp(1rem, 3vw, 1.5rem) 7rem;
+  max-width: 1250px;
+  margin: 0 auto;
+  animation: pageIn 0.35s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  width: 100%;
+}
+
+.site-section.active {
+  display: block;
+}
+
+@keyframes pageIn {
+  from { opacity: 0; transform: translateY(12px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes pulse {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.3); }
+}
+
+/* ==========================================================================
+   HERO BANNER & SCRAPBOOK GRID
+   ========================================================================== */
+.hero-banner {
+  text-align: center;
+  padding: clamp(1.5rem, 5vw, 3.5rem) 0.5rem 1.5rem;
+  position: relative;
+  width: 100%;
+}
+
+.hero-super-title {
+  font-family: var(--font-display);
+  font-weight: 900;
+  font-size: clamp(2.3rem, 7.5vw, 6rem);
+  line-height: 1;
+  text-transform: uppercase;
+  letter-spacing: -1.5px;
+  margin-bottom: 1rem;
+  text-shadow: 2px 2px 0 var(--pink), 5px 5px 0 var(--border-color);
+  word-break: break-word;
+}
+
+.hero-sub {
+  font-size: clamp(0.95rem, 2vw, 1.35rem);
+  color: var(--text-muted);
+  max-width: 680px;
+  margin: 0 auto 1.8rem;
+  line-height: 1.55;
+  padding: 0 0.5rem;
+}
+
+.handwriting-accent {
+  font-family: var(--font-hand);
+  font-size: clamp(1.4rem, 3.5vw, 1.85rem);
+  color: var(--pink);
+  display: block;
+  transform: rotate(-2deg);
+  margin-top: 0.3rem;
+}
+
+/* Friendship Live Duration Counter */
+.counter-board {
+  background: var(--card-bg);
+  border: 3px solid var(--border-color);
+  border-radius: 18px;
+  padding: clamp(1rem, 2.5vw, 1.8rem);
+  box-shadow: var(--brutal-shadow);
+  max-width: 800px;
+  margin: 1.8rem auto;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 0.75rem;
+  position: relative;
+  width: 100%;
+}
+
+.counter-box {
+  text-align: center;
+  padding: 0.75rem 0.4rem;
+  background: var(--bg-alt);
+  border: 2px solid var(--border-color);
+  border-radius: 12px;
+}
+
+.counter-num {
+  font-family: var(--font-mono);
+  font-size: clamp(1.7rem, 3.8vw, 3rem);
+  font-weight: 700;
+  color: var(--electric-purple);
+  line-height: 1;
+}
+
+.counter-label {
+  font-family: var(--font-display);
+  font-size: clamp(0.65rem, 1.5vw, 0.75rem);
+  text-transform: uppercase;
+  font-weight: 800;
+  margin-top: 0.3rem;
+  color: var(--text-muted);
+}
+
+/* Hero Tape Marquee */
+.marquee-container {
+  width: 100vw;
+  margin-left: calc(50% - 50vw);
+  background: var(--lime);
+  color: #121118;
+  border-top: 2px solid var(--border-color);
+  border-bottom: 2px solid var(--border-color);
+  padding: 0.65rem 0;
+  overflow: hidden;
+  white-space: nowrap;
+  margin-top: 1.5rem;
+  margin-bottom: 2rem;
+  transform: rotate(-1deg);
+}
+
+.marquee-track {
+  display: inline-block;
+  white-space: nowrap;
+  animation: marquee 24s linear infinite;
+  font-family: var(--font-display);
+  font-weight: 900;
+  font-size: clamp(0.85rem, 2vw, 1rem);
+  letter-spacing: 1px;
+}
+
+@keyframes marquee {
+  0% { transform: translateX(0%); }
+  100% { transform: translateX(-50%); }
+}
+
+.scrapbook-hero-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 290px), 1fr));
+  gap: 1.8rem;
+  margin-top: 2.5rem;
+  align-items: center;
+  width: 100%;
+}
+
+/* Stats Cards */
+.stats-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 190px), 1fr));
+  gap: 1rem;
+  margin: 2.5rem 0;
+  width: 100%;
+}
+
+.stat-card {
+  background: var(--card-bg);
+  border: 2px solid var(--border-color);
+  padding: 1.25rem 1rem;
+  border-radius: 14px;
+  box-shadow: var(--brutal-shadow);
+  text-align: center;
+  transition: transform 0.2s;
+}
+
+.stat-card:hover {
+  transform: translateY(-4px);
+}
+
+.stat-value {
+  font-family: var(--font-display);
+  font-size: clamp(1.8rem, 4vw, 2.3rem);
+  font-weight: 900;
+  color: var(--pink);
+}
+
+.stat-desc {
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--text-muted);
+  margin-top: 0.25rem;
+}
+
+/* Squad Friends Cards */
+.friends-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(min(100%, 280px), 1fr));
+  gap: 1.5rem;
+  margin-top: 1.5rem;
+  width: 100%;
+}
+
+.friend-card {
+  background: var(--card-bg);
+  border: 2px solid var(--border-color);
+  border-radius: 16px;
+  padding: 1.25rem;
+  box-shadow: var(--brutal-shadow);
+  cursor: pointer;
+  position: relative;
+  transition: all 0.25s ease;
+  display: flex;
+  flex-direction: column;
+}
+
+.friend-card:hover {
+  transform: translate(-3px, -3px) rotate(0.8deg);
+  box-shadow: var(--brutal-shadow-hover);
+}
+
+.friend-card .avatar-wrap {
+  width: 100%;
+  height: clamp(200px, 50vw, 260px);
+  border-radius: 12px;
+  overflow: hidden;
+  border: 2px solid var(--border-color);
+  margin-bottom: 0.85rem;
+  position: relative;
+}
+
+.friend-card img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.4s ease;
+}
+
+.friend-card:hover img {
+  transform: scale(1.05);
+}
+
+.friend-badge {
+  position: absolute;
+  bottom: 8px;
+  right: 8px;
+  background: var(--lime);
+  color: #121118;
+  border: 2px solid var(--border-color);
+  font-size: 0.72rem;
+  font-weight: 800;
+  padding: 0.2rem 0.5rem;
+  border-radius: 20px;
+}
+
+.friend-card h3 {
+  font-family: var(--font-display);
+  font-size: clamp(1.2rem, 3vw, 1.4rem);
+  font-weight: 900;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 0.3rem;
+}
+
+.friend-card .nickname {
+  font-family: var(--font-hand);
+  font-size: 1.25rem;
+  color: var(--pink);
+}
+
+.friend-card .role {
+  font-weight: 700;
+  color: var(--electric-purple);
+  font-size: 0.82rem;
+  margin: 0.35rem 0;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.friend-card .quote-snippet {
+  font-style: italic;
+  color: var(--text-muted);
+  font-size: 0.88rem;
+  margin-top: auto;
+  padding-top: 0.7rem;
+  border-top: 1px dashed var(--border-color);
+}
+
+/* Filter Controls */
+.filter-bar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  margin-bottom: 1.5rem;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+}
+
+.filter-buttons {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+}
+
+.filter-btn {
+  padding: 0.4rem 0.85rem;
+  border: 2px solid var(--border-color);
+  border-radius: 30px;
+  font-family: var(--font-display);
+  font-weight: 800;
+  font-size: 0.78rem;
+  background: var(--card-bg);
+  color: var(--text);
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.filter-btn.active,
+.filter-btn:hover {
+  background: var(--lavender);
+  color: #121118;
+  box-shadow: 2px 2px 0 var(--border-color);
+}
+
+.search-input-wrap {
+  position: relative;
+  width: 100%;
+  max-width: 300px;
+}
+
+.search-input-wrap input {
+  width: 100%;
+  padding: 0.5rem 1rem 0.5rem 2.2rem;
+  border: 2px solid var(--border-color);
+  border-radius: 20px;
+  background: var(--card-bg);
+  color: var(--text);
+  font-family: var(--font-body);
+  font-size: 0.9rem;
+  outline: none;
+}
+
+.search-input-wrap i {
+  position: absolute;
+  left: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: var(--text-muted);
+}
+
+/* ==========================================================================
+   INFINITE FILMSTRIP MARQUEE
+   ========================================================================== */
+.filmstrip-row {
+  width: 100vw;
+  margin-left: calc(50% - 50vw);
+  overflow: hidden;
+  padding: 1rem 0 1.5rem;
+  margin-bottom: 2.5rem;
+  position: relative;
+  mask-image: linear-gradient(to right, transparent, black 8%, black 92%, transparent);
+  -webkit-mask-image: linear-gradient(to right, transparent, black 8%, black 92%, transparent);
+}
+
+.filmstrip-track {
+  display: flex;
+  gap: 1.5rem;
+  width: max-content;
+  animation: filmstripScroll 12s linear infinite;
+}
+
+.filmstrip-track:hover {
+  animation-play-state: paused;
+}
+
+@keyframes filmstripScroll {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+
+.filmstrip-cell {
+  flex: 0 0 clamp(190px, 45vw, 240px);
+  background: #121118;
+  padding: 10px 8px;
+  border-radius: 6px;
+  border: 2px solid #000;
+  position: relative;
+  box-shadow: var(--brutal-shadow-sm);
+  cursor: pointer;
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+  user-select: none;
+}
+
+.filmstrip-cell:hover {
+  transform: translateY(-6px) scale(1.03);
+  box-shadow: var(--brutal-shadow-hover);
+}
+
+.filmstrip-sprockets {
+  display: flex;
+  justify-content: space-between;
+  padding: 2px 4px;
+  margin-bottom: 6px;
+}
+
+.sprocket-hole {
+  width: 10px;
+  height: 7px;
+  background: #fff;
+  border-radius: 2px;
+}
+
+.filmstrip-cell img,
+.filmstrip-cell video {
+  width: 100%;
+  height: clamp(130px, 32vw, 170px);
+  object-fit: cover;
+  display: block;
+  border-radius: 2px;
+}
+
+/* ==========================================================================
+   MASONRY MEMORY GALLERY
+   ========================================================================== */
+.gallery-masonry {
+  columns: 3 300px;
+  column-gap: 1.5rem;
+  width: 100%;
+}
+
+.gallery-item {
+  break-inside: avoid;
+  margin-bottom: 1.5rem;
+  cursor: pointer;
+}
+
+/* ==========================================================================
+   FULLSCREEN LIGHTBOX
+   ========================================================================== */
+.lightbox-overlay {
+  position: fixed;
+  inset: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(18, 17, 24, 0.93);
+  z-index: 99999;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem;
+}
+
+.lightbox-overlay.active {
+  display: flex;
+}
+
+.lightbox-card {
+  background: #ffffff;
+  max-width: 750px;
+  width: 100%;
+  padding: 16px 16px 30px;
+  border: 3px solid var(--border-color);
+  border-radius: 12px;
+  box-shadow: 10px 10px 0 var(--pink);
+  position: relative;
+  animation: popIn 0.25s ease-out;
+  max-height: 90vh;
+  overflow-y: auto;
+}
+
+[data-theme="dark"] .lightbox-card {
+  background: #201e2e;
+}
+
+@keyframes popIn {
+  from { transform: scale(0.9); opacity: 0; }
+  to { transform: scale(1); opacity: 1; }
+}
+
+.lightbox-card img,
+.lightbox-card video {
+  width: 100%;
+  max-height: 55vh;
+  object-fit: contain;
+  background: #000;
+  border-radius: 6px;
+  border: 2px solid var(--border-color);
+}
+
+.lightbox-info {
+  margin-top: 1rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+}
+
+.lightbox-close {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  width: 38px;
+  height: 38px;
+  background: var(--pink);
+  border: 2px solid var(--border-color);
+  border-radius: 50%;
+  color: #fff;
+  font-size: 1.2rem;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 2px 2px 0 var(--border-color);
+  z-index: 10;
+}
+
+.lightbox-nav-btn {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 44px;
+  height: 44px;
+  background: var(--lime);
+  border: 2px solid var(--border-color);
+  border-radius: 50%;
+  font-size: 1.2rem;
+  cursor: pointer;
+  box-shadow: 3px 3px 0 var(--border-color);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #121118;
+  z-index: 10;
+}
+
+.lightbox-prev { left: 8px; }
+.lightbox-next { right: 8px; }
+
+/* ==========================================================================
+   TIMELINE SECTION
+   ========================================================================== */
+.timeline-wrapper {
+  position: relative;
+  max-width: 900px;
+  margin: 3rem auto;
+  padding: 1rem 0;
+  width: 100%;
+}
+
+.timeline-line {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 50%;
+  width: 4px;
+  background: var(--border-color);
+  transform: translateX(-50%);
+}
+
+.timeline-event {
+  position: relative;
+  width: 50%;
+  padding: 1rem 2rem;
+  margin-bottom: 2.5rem;
+}
+
+.timeline-event.left {
+  left: 0;
+  text-align: right;
+}
+
+.timeline-event.right {
+  left: 50%;
+  text-align: left;
+}
+
+.timeline-dot {
+  position: absolute;
+  top: 24px;
+  width: 20px;
+  height: 20px;
+  background: var(--lime);
+  border: 3px solid var(--border-color);
+  border-radius: 50%;
+  z-index: 2;
+}
+
+.timeline-event.left .timeline-dot { right: -10px; }
+.timeline-event.right .timeline-dot { left: -10px; }
+
+.timeline-content-card {
+  background: var(--card-bg);
+  border: 2px solid var(--border-color);
+  border-radius: 14px;
+  padding: 1.3rem;
+  box-shadow: var(--brutal-shadow);
+  transition: transform 0.2s;
+}
+
+.timeline-content-card:hover {
+  transform: translateY(-3px);
+}
+
+.timeline-date-tag {
+  display: inline-block;
+  font-family: var(--font-mono);
+  font-size: 0.95rem;
+  background: var(--pink-soft);
+  color: var(--pink);
+  padding: 0.2rem 0.6rem;
+  border-radius: 6px;
+  font-weight: 700;
+  margin-bottom: 0.5rem;
+}
+
+.timeline-img {
+  width: 100%;
+  height: 180px;
+  object-fit: cover;
+  border-radius: 8px;
+  border: 1px solid var(--border-color);
+  margin-top: 0.8rem;
+}
+
+/* ==========================================================================
+   INSIDE JOKES
+   ========================================================================== */
+.jokes-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(min(100%, 280px), 1fr));
+  gap: 1.8rem;
+  margin-top: 2rem;
+  width: 100%;
+}
+
+.joke-bubble-card {
+  background: var(--card-bg);
+  border: 2px solid var(--border-color);
+  border-radius: 18px;
+  padding: 1.5rem;
+  box-shadow: var(--brutal-shadow);
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.joke-tag {
+  align-self: flex-start;
+  font-size: 0.75rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  background: var(--lime);
+  color: #121118;
+  padding: 0.2rem 0.6rem;
+  border-radius: 8px;
+  border: 1px solid var(--border-color);
+  margin-bottom: 0.8rem;
+}
+
+.joke-quote {
+  font-size: 1.15rem;
+  font-weight: 700;
+  line-height: 1.4;
+  margin-bottom: 0.8rem;
+}
+
+.joke-origin {
+  font-size: 0.85rem;
+  color: var(--text-muted);
+  border-top: 1px dashed var(--border-color);
+  padding-top: 0.6rem;
+  display: flex;
+  justify-content: space-between;
+}
+
+.joke-reactions {
+  display: flex;
+  gap: 0.4rem;
+  margin-top: 0.6rem;
+}
+
+.react-pill {
+  background: var(--bg-alt);
+  border: 1px solid var(--border-color);
+  padding: 0.2rem 0.5rem;
+  border-radius: 12px;
+  font-size: 0.8rem;
+  cursor: pointer;
+  user-select: none;
+}
+
+/* ==========================================================================
+   FLOATING AUDIO PLAYER WIDGET
+   ========================================================================== */
+.music-player-fixed {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  z-index: 9990;
+  background: var(--card-bg);
+  border: 2px solid var(--border-color);
+  border-radius: 16px;
+  padding: 1rem;
+  box-shadow: var(--brutal-shadow);
+  width: min(340px, calc(100vw - 36px));
+  transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.music-player-fixed.minimized {
+  width: 65px;
+  height: 65px;
+  border-radius: 50%;
+  padding: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+.player-min-toggle {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: var(--text);
+  font-size: 0.9rem;
+}
+
+.music-player-fixed.minimized .player-full-content {
+  display: none;
+}
+
+.music-player-fixed.minimized .player-mini-trigger {
+  display: flex;
+  width: 100%;
+  height: 100%;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.4rem;
+  background: var(--lime);
+  color: #121118;
+  cursor: pointer;
+}
+
+.player-mini-trigger {
+  display: none;
+}
+
+.player-track-info {
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+  margin-bottom: 0.8rem;
+}
+
+.track-art {
+  width: 48px;
+  height: 48px;
+  border-radius: 8px;
+  border: 2px solid var(--border-color);
+  object-fit: cover;
+}
+
+.track-meta {
+  flex: 1;
+  overflow: hidden;
+}
+
+.track-meta .title {
+  font-weight: 800;
+  font-size: 0.95rem;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.track-meta .artist {
+  font-size: 0.78rem;
+  color: var(--text-muted);
+}
+
+.visualizer-bars {
+  display: flex;
+  gap: 3px;
+  height: 16px;
+  align-items: flex-end;
+  margin-bottom: 0.6rem;
+}
+
+.v-bar {
+  width: 4px;
+  background: var(--pink);
+  border-radius: 2px;
+  height: 4px;
+  transition: height 0.1s ease;
+}
+
+.player-progress-container {
+  width: 100%;
+  height: 6px;
+  background: var(--bg-alt);
+  border: 1px solid var(--border-color);
+  border-radius: 4px;
+  cursor: pointer;
+  position: relative;
+  margin-bottom: 0.8rem;
+}
+
+.player-progress-fill {
+  height: 100%;
+  background: var(--electric-purple);
+  border-radius: 3px;
+  width: 0%;
+}
+
+.player-controls {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.player-btn {
+  background: none;
+  border: none;
+  font-size: 1.1rem;
+  color: var(--text);
+  cursor: pointer;
+  transition: transform 0.1s;
+}
+
+.player-btn:hover {
+  transform: scale(1.15);
+  color: var(--pink);
+}
+
+.play-pause-btn {
+  width: 38px;
+  height: 38px;
+  background: var(--lime);
+  color: #121118;
+  border: 2px solid var(--border-color);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 2px 2px 0 var(--border-color);
+}
+
+/* ==========================================================================
+   LETTERS GRID & MODAL
+   ========================================================================= */
+.letters-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(min(100%, 280px), 1fr));
+  gap: 2rem;
+  margin-top: 2rem;
+  width: 100%;
+}
+
+.envelope-card {
+  background: var(--card-bg);
+  border: 2px solid var(--border-color);
+  border-radius: 16px;
+  padding: 2rem 1.5rem;
+  text-align: center;
+  box-shadow: var(--brutal-shadow);
+  cursor: pointer;
+  position: relative;
+  transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.envelope-card:hover {
+  transform: translateY(-6px);
+  box-shadow: var(--brutal-shadow-hover);
+}
+
+.envelope-icon {
+  font-size: 3rem;
+  color: var(--pink);
+  margin-bottom: 1rem;
+  transition: transform 0.3s ease;
+}
+
+.envelope-card:hover .envelope-icon {
+  transform: scale(1.2) rotate(-5deg);
+}
+
+.envelope-title {
+  font-family: var(--font-display);
+  font-size: 1.25rem;
+  font-weight: 800;
+  margin-bottom: 0.5rem;
+}
+
+.envelope-stamp {
+  position: absolute;
+  top: 10px;
+  right: 12px;
+  border: 1px dashed var(--pink);
+  padding: 2px 6px;
+  font-size: 0.65rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  color: var(--pink);
+}
+
+.letter-modal {
+  position: fixed;
+  inset: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(18, 17, 24, 0.9);
+  z-index: 99999;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  padding: 1.5rem;
+}
+
+.letter-modal.active {
+  display: flex;
+}
+
+.letter-paper {
+  background: #fffdf7;
+  color: #17171e;
+  border: 3px solid #17171e;
+  border-radius: 8px;
+  padding: clamp(1.5rem, 3vw, 2.5rem);
+  max-width: 650px;
+  width: 100%;
+  box-shadow: 10px 10px 0 var(--lavender);
+  position: relative;
+  max-height: 85vh;
+  overflow-y: auto;
+  font-family: var(--font-hand);
+  font-size: clamp(1.2rem, 2.5vw, 1.45rem);
+  line-height: 1.6;
+}
+
+.letter-paper h2 {
+  font-family: var(--font-display);
+  font-size: 1.8rem;
+  margin-bottom: 1.2rem;
+  border-bottom: 2px dashed #17171e;
+  padding-bottom: 0.5rem;
+}
+
+.letter-close-btn {
+  position: absolute;
+  top: 14px;
+  right: 16px;
+  background: var(--pink);
+  border: 2px solid #17171e;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+}
+
+/* ==========================================================================
+   TIME CAPSULE FORM
+   ========================================================================== */
+.capsule-form-card {
+  background: var(--card-bg);
+  border: 2px solid var(--border-color);
+  border-radius: 18px;
+  padding: clamp(1.2rem, 3vw, 2rem);
+  box-shadow: var(--brutal-shadow);
+  max-width: 700px;
+  margin: 0 auto 3rem;
+  width: 100%;
+}
+
+.form-group {
+  margin-bottom: 1.2rem;
+}
+
+.form-group label {
+  display: block;
+  font-family: var(--font-display);
+  font-weight: 800;
+  font-size: 0.85rem;
+  text-transform: uppercase;
+  margin-bottom: 0.4rem;
+}
+
+.form-control {
+  width: 100%;
+  padding: 0.75rem 1rem;
+  border: 2px solid var(--border-color);
+  border-radius: 10px;
+  background: var(--bg);
+  color: var(--text);
+  font-family: var(--font-body);
+  font-size: 0.95rem;
+  outline: none;
+}
+
+.capsule-list-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(min(100%, 300px), 1fr));
+  gap: 1.8rem;
+  width: 100%;
+}
+
+.capsule-item-card {
+  background: var(--card-bg);
+  border: 2px solid var(--border-color);
+  border-radius: 14px;
+  padding: 1.4rem;
+  box-shadow: var(--brutal-shadow);
+  position: relative;
+}
+
+.capsule-lock-status {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  font-size: 0.8rem;
+  font-weight: 800;
+  padding: 0.3rem 0.6rem;
+  border-radius: 20px;
+  border: 1px solid var(--border-color);
+  margin-bottom: 0.8rem;
+}
+
+.status-locked {
+  background: #ffe3e3;
+  color: #d90429;
+}
+
+.status-unlocked {
+  background: var(--lime);
+  color: #121118;
+}
+
+/* ==========================================================================
+   UPLOAD MODAL & TOASTS
+   ========================================================================== */
+.upload-modal-overlay {
+  position: fixed;
+  inset: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(18, 17, 24, 0.92);
+  z-index: 100005;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem;
+  backdrop-filter: blur(8px);
+}
+
+.upload-modal-overlay.active {
+  display: flex;
+}
+
+.upload-box {
+  background: var(--card-bg);
+  border: 3px solid var(--border-color);
+  border-radius: 18px;
+  box-shadow: 10px 10px 0 var(--lime);
+  max-width: 540px;
+  width: 100%;
+  padding: clamp(1.2rem, 3.5vw, 2rem);
+  position: relative;
+  max-height: 90vh;
+  overflow-y: auto;
+}
+
+#toast-shelf {
+  position: fixed;
+  bottom: 20px;
+  left: 20px;
+  z-index: 100001;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  pointer-events: none;
+  max-width: calc(100vw - 40px);
+}
+
+.toast-msg {
+  background: var(--card-bg);
+  border: 2px solid var(--border-color);
+  box-shadow: 4px 4px 0 var(--border-color);
+  padding: 0.8rem 1.2rem;
+  border-radius: 10px;
+  font-weight: 700;
+  font-size: 0.9rem;
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  animation: toastIn 0.25s forwards, toastOut 0.25s forwards 3s;
+  pointer-events: auto;
+}
+
+@keyframes toastIn {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes toastOut {
+  from { opacity: 1; transform: translateY(0); }
+  to { opacity: 0; transform: translateY(20px); }
+}
+
+/* Sound Entrance Gate */
+.gate-overlay {
+  position: fixed;
+  inset: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(18, 17, 24, 0.96);
+  z-index: 100000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1.5rem;
+  backdrop-filter: blur(8px);
+}
+
+.gate-box {
+  background: var(--bg);
+  border: 3px solid var(--border-color);
+  border-radius: 20px;
+  max-width: 500px;
+  width: 100%;
+  padding: 2.5rem 2rem;
+  text-align: center;
+  box-shadow: 12px 12px 0 var(--lime);
+}
+
+/* Confetti Canvas */
+#confetti-canvas {
+  position: fixed;
+  inset: 0;
+  width: 100vw;
+  height: 100vh;
+  pointer-events: none;
+  z-index: 99998;
+}
+
+/* ==========================================================================
+   MOBILE & RESPONSIVE RULES (CLEAN & COMPLETE)
+   ========================================================================== */
+@media (max-width: 900px) {
+  .gallery-masonry {
+    columns: 2 240px;
+  }
+}
+
+@media (max-width: 768px) {
+  /* Prevent header items from pushing the hamburger button off-screen */
+  .nav-container {
+    padding: 0.5rem 0.8rem;
+    gap: 0.4rem;
+  }
+
+  .nav-menu {
+    display: none;
+  }
+
+  /* Compact header tools on mobile */
+  .nav-tools {
+    gap: 0.35rem;
+  }
+
+  .nav-tools .btn-y2k {
+    padding: 0.45rem 0.65rem;
+    font-size: 0.72rem;
+  }
+
+  /* Make sure the hamburger button is explicitly displayed and clickable */
+  .mobile-menu-btn {
+    display: flex !important;
+    flex-shrink: 0;
+    width: 36px;
+    height: 36px;
+  }
+
+  .icon-btn {
+    width: 36px;
+    height: 36px;
+    flex-shrink: 0;
+  }
+
+  .mobile-menu-drawer {
+    position: fixed;
+    top: 58px;
+    left: 0;
+    right: 0;
+    width: 100%;
+    background: var(--bg);
+    border-bottom: 3px solid var(--border-color);
+    padding: 1.2rem 1rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.65rem;
+    z-index: 99999;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.25);
+  }
+
+  .mobile-menu-drawer .nav-link {
+    width: 100%;
+    text-align: center;
+    padding: 0.75rem 1rem;
+    font-size: 0.95rem;
+    border: 2px solid var(--border-color);
+    background: var(--card-bg);
+  }
+
+  /* Reset aggressive polaroid tilt so cards don't touch screen edges */
+  .polaroid-card {
+    transform: none !important;
+    max-width: 320px;
+    margin: 0 auto;
+  }
+
+  .scrapbook-hero-grid {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+  }
+
+  .counter-board {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 0.8rem;
+    padding: 1rem;
+  }
+
+  /* Single-column vertical timeline for touch devices */
+  .timeline-line {
+    left: 20px;
+  }
+
+  .timeline-event {
+    width: 100%;
+    left: 0 !important;
+    padding-left: 50px;
+    padding-right: 0.5rem;
+    text-align: left !important;
+  }
+
+  .timeline-event.left .timeline-dot,
+  .timeline-event.right .timeline-dot {
+    left: 10px !important;
+    right: auto !important;
+  }
+
+  .filmstrip-row {
+    padding: 0.8rem 0 1.2rem;
+    mask-image: none;
+    -webkit-mask-image: none;
+  }
+
+  .filmstrip-track {
+    gap: 0.9rem;
+  }
+
+  .music-player-fixed {
+    width: calc(100vw - 32px);
+    left: 16px;
+    right: 16px;
+    bottom: 16px;
+  }
+}
+
+@media (max-width: 480px) {
+  .gallery-masonry {
+    columns: 1 100%;
+  }
+
+  .hero-banner {
+    padding-top: 1.2rem;
+  }
+
+  .counter-num {
+    font-size: 1.6rem;
+  }
+
+  .counter-label {
+    font-size: 0.65rem;
+  }
+
+  .btn-y2k {
+    width: 100%;
+    padding: 0.75rem 1rem;
+  }
+
+  .nav-tools .btn-y2k {
+    width: auto;
+  }
+
+  .search-input-wrap {
+    max-width: 100%;
+  }
+}
+  </style>
+</head>
+<body>
+  <canvas id="confetti-canvas"></canvas>
+  <div class="custom-cursor" id="custom-cursor"></div>
+  <div class="cursor-dot" id="cursor-dot"></div>
+  <div id="toast-shelf"></div>
+
+  <!-- Audio Gate Overlay -->
+  <div class="gate-overlay" id="entry-gate">
+    <div class="gate-box">
+      <span class="sticker-badge" style="margin-bottom: 1rem;">WELCOME BESTIES</span>
+      <h2 style="font-family: var(--font-display); font-size: 2.2rem; font-weight: 900; margin: 0.8rem 0;">ENTER THE LORE</h2>
+      <p style="color: var(--text-muted); margin-bottom: 2rem; font-size: 0.95rem;">
+        An aesthetic archive of late-night drives, college chaos, unhinged laughter, and memories that will never fade.
+      </p>
+      <div style="display: flex; flex-direction: column; gap: 0.8rem;">
+        <button class="btn-y2k btn-pink" onclick="enterSite(true)">
+          <i class="fa-solid fa-volume-high"></i> Enter With Music
+        </button>
+        <button class="btn-y2k btn-white" onclick="enterSite(false)">
+          <i class="fa-solid fa-volume-xmark"></i> Enter Silently
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Main Navigation Header -->
+  <header class="site-header">
+    <div class="nav-container">
+      <div class="brand-logo" onclick="switchSection('home')">
+        <span class="dot"></span>
+        <span>NEXO'S</span>
+      </div>
+
+      <ul class="nav-menu">
+        <li><button class="nav-link active" onclick="switchSection('home')">Home</button></li>
+        <li><button class="nav-link" onclick="switchSection('friends')">Our Friends</button></li>
+        <li><button class="nav-link" onclick="switchSection('memories')">Memory Wall</button></li>
+        <li><button class="nav-link" onclick="switchSection('timeline')">Timeline</button></li>
+        <li><button class="nav-link" onclick="switchSection('jokes')">Inside Jokes</button></li>
+        <li><button class="nav-link" onclick="switchSection('letters')">Letters</button></li>
+        <li><button class="nav-link" onclick="switchSection('capsule')">Time Capsule</button></li>
+      </ul>
+
+      <div class="nav-tools">
+      
+        <button class="icon-btn" onclick="toggleTheme()" title="Toggle Light/Dark Theme" aria-label="Theme toggle">
+          <i class="fa-solid fa-moon" id="theme-icon"></i>
+        </button>
+        <button class="icon-btn" onclick="fireConfetti()" title="Trigger Confetti Party" aria-label="Confetti party">
+          ✨
+        </button>
+        <button class="icon-btn mobile-menu-btn" onclick="toggleMobileNav()" title="Open Menu">
+  <i class="fa-solid fa-bars" id="burger-icon"></i>
+</button>
+      </div>
+    </div>
+
+    <!-- Mobile Dropdown Menu -->
+    <div class="mobile-menu-drawer" id="mobile-drawer" style="display: none;">
+      <button class="btn-y2k btn-white" onclick="switchSection('home'); toggleMobileNav()">Home</button>
+      <button class="btn-y2k btn-white" onclick="switchSection('friends'); toggleMobileNav()">Our Friends</button>
+      <button class="btn-y2k btn-white" onclick="switchSection('memories'); toggleMobileNav()">Memory Wall</button>
+      <button class="btn-y2k btn-white" onclick="switchSection('timeline'); toggleMobileNav()">Timeline</button>
+      <button class="btn-y2k btn-white" onclick="switchSection('jokes'); toggleMobileNav()">Inside Jokes</button>
+      <button class="btn-y2k btn-white" onclick="switchSection('letters'); toggleMobileNav()">Open When Letters</button>
+      <button class="btn-y2k btn-white" onclick="switchSection('capsule'); toggleMobileNav()">Future Time Capsule</button>
+      <button class="btn-y2k btn-lime" onclick="openUploadModal(); toggleMobileNav()">+ Drop Lore (Upload)</button>
+    </div>
+  </header>
+
+  <main id="app-container">
+    <!-- Home Section -->
+    <section id="sec-home" class="site-section active">
+      <div class="hero-banner">
+        <span class="sticker-badge">DIGITAL SCRAPBOOK VOL. 1</span>
+        <h1 class="hero-super-title">THE STORY <br>OF US ❤️.</h1>
+        <p class="hero-sub">
+          A living, breathing museum of college dorm talks, 3 AM fries runs, inside jokes only four people understand, and unbreakable bonds.
+          <span class="handwriting-accent">~ forever & always unapologetically us ~</span>
+        </p>
+        <div style="display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap;">
+          <button class="btn-y2k btn-pink" onclick="switchSection('memories')">
+            <i class="fa-solid fa-camera"></i> Enter Our World
+          </button>
+          <button class="btn-y2k btn-lime" onclick="openUploadModal()">
+            <i class="fa-solid fa-plus"></i> Upload To Vault
+          </button>
+        </div>
+      </div>
+
+      <!-- Friendship Duration Tracker -->
+      <div class="counter-board">
+        <div class="tape tape-top-center"></div>
+        <div class="counter-box">
+          <div class="counter-num" id="cnt-days">000</div>
+          <div class="counter-label">Days In Lore</div>
+        </div>
+        <div class="counter-box">
+          <div class="counter-num" id="cnt-hours">00</div>
+          <div class="counter-label">Hours</div>
+        </div>
+        <div class="counter-box">
+          <div class="counter-num" id="cnt-minutes">00</div>
+          <div class="counter-label">Minutes</div>
+        </div>
+        <div class="counter-box">
+          <div class="counter-num" id="cnt-seconds">00</div>
+          <div class="counter-label">Seconds</div>
+        </div>
+      </div>
+
+      <!-- Marquee Ticker -->
+      <div class="marquee-container">
+        <div class="marquee-track">
+          ★ CHAPTER ONE: UNHINGED ADVENTURES ★ BEST FRIENDS FOREVER ★ NO BAD VIBES ★ LIVE CLOUD VAULT CONNECTED ★ PERMANENT LORE ★ DROP PHOTOS NOW ★
+          ★ CHAPTER ONE: UNHINGED ADVENTURES ★ BEST FRIENDS FOREVER ★ NO BAD VIBES ★ LIVE CLOUD VAULT CONNECTED ★ PERMANENT LORE ★ DROP PHOTOS NOW ★
+        </div>
+      </div>
+
+     <!-- Scrapbook Grid Preview -->
+      <div class="scrapbook-hero-grid">
+        <div class="polaroid-card" style="transform: rotate(-3deg);">
+          <div class="tape tape-top-left"></div>
+          <!-- Left Photo -->
+          <img src="assets/home/polaroid1.jpeg" alt="Squad core memory" onerror="this.src='https://placehold.co/600x600/ffd1dc/17171e?text=Friendship+Memory'">
+          <div class="polaroid-caption">The Golden Hour rooftop talks ✨</div>
+        </div>
+
+        <div style="background: var(--card-bg); border: 2px solid var(--border-color); border-radius: 16px; padding: 2rem; box-shadow: var(--brutal-shadow);">
+          <span class="sticker-badge" style="background: var(--lavender);">FEATURED LORE</span>
+          <h3 style="font-family: var(--font-display); font-size: 1.8rem; margin: 1rem 0 0.5rem;">The Permanent Memory Vault</h3>
+          <p style="color: var(--text-muted); line-height: 1.6; margin-bottom: 1.2rem;">
+           Drop any moments from your phone anytime.
+          </p>
+          <button class="btn-y2k btn-white" onclick="openUploadModal()">Drop A Photo Now →</button>
+        </div>
+
+        <div class="polaroid-card" style="transform: rotate(4deg);">
+          <!-- Right Photo -->
+          <img src="assets/home/polaroid2.jpeg" alt="Concert memory" onerror="this.src='https://placehold.co/600x600/d4ff33/17171e?text=Concert+Night'">
+          <div class="polaroid-caption">Crying to our favorite song live 🎧</div>
+        </div>
+      </div>
+
+      <!-- Stats Cards -->
+      <div class="stats-container">
+        <div class="stat-card">
+          <div class="stat-value" id="stat-mem-count">0</div>
+          <div class="stat-desc">Permanent Lore Snaps Uploaded</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-value">1,420+</div>
+          <div class="stat-desc">Cups of Chai & Coffee Consumed</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-value">98.4%</div>
+          <div class="stat-desc">Time Spent Laughing at Nothing</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-value">∞</div>
+          <div class="stat-desc">Times Someone Said '5 Mins Door'</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Friends Section -->
+    <section id="sec-friends" class="site-section">
+      <div style="text-align: center; margin-bottom: 2.5rem;">
+        <span class="sticker-badge">THE MAIN CHARACTERS</span>
+        <h2 style="font-family: var(--font-display); font-size: 3rem; font-weight: 900; margin-top: 0.5rem;">MEET THE SQUAD</h2>
+        <p style="color: var(--text-muted);">The chaotic minds behind every questionable late-night decision.</p>
+      </div>
+      <div class="friends-grid" id="friends-card-grid"></div>
+    </section>
+
+    <!-- Memory Wall Section -->
+    <section id="sec-memories" class="site-section">
+      <div style="text-align: center; margin-bottom: 2rem;">
+        <span class="sticker-badge">VISUAL ARCHIVES</span>
+        <h2 style="font-family: var(--font-display); font-size: 3rem; font-weight: 900; margin-top: 0.5rem;">THE MEMORY WALL</h2>
+        <p style="color: var(--text-muted);">Real-time cloud database of photos & videos preserved for life.</p>
+        <div style="margin-top: 1rem;">
+          <button class="btn-y2k btn-lime" onclick="openUploadModal()">
+            <i class="fa-solid fa-cloud-arrow-up"></i> Drop New Memory
+          </button>
+        </div>
+      </div>
+
+      <!-- Filmstrip horizontal preview reel -->
+      <div class="filmstrip-row" id="filmstrip-row"></div>
+
+      <!-- Filter & Search -->
+      <div class="filter-bar">
+        <div class="filter-buttons" id="gallery-filters">
+          <button class="filter-btn active" onclick="filterGallery('all', this)">All Snaps</button>
+          <button class="filter-btn" onclick="filterGallery('college', this)">Campus Days</button>
+          <button class="filter-btn" onclick="filterGallery('trips', this)">Roadtrips</button>
+          <button class="filter-btn" onclick="filterGallery('chaos', this)">Pure Chaos</button>
+          <button class="filter-btn" onclick="filterGallery('golden', this)">Golden Hours</button>
+        </div>
+        <div class="search-input-wrap">
+          <i class="fa-solid fa-magnifying-glass"></i>
+          <input type="text" id="gallery-search" placeholder="Search caption or location..." oninput="handleGallerySearch()">
+        </div>
+      </div>
+
+      <!-- Gallery Masonry Display -->
+      <div class="gallery-masonry" id="gallery-masonry-container"></div>
+    </section>
+
+    <!-- Timeline Section -->
+    <section id="sec-timeline" class="site-section">
+      <div style="text-align: center; margin-bottom: 3rem;">
+        <span class="sticker-badge">CHRONICLES</span>
+        <h2 style="font-family: var(--font-display); font-size: 3rem; font-weight: 900; margin-top: 0.5rem;">OUR TIMELINE</h2>
+        <p style="color: var(--text-muted);">From nervous introductions to people who share one single brain cell.</p>
+      </div>
+      <div class="timeline-wrapper">
+        <div class="timeline-line"></div>
+        <div id="timeline-events-container"></div>
+      </div>
+    </section>
+
+    <!-- Inside Jokes Section -->
+    <section id="sec-jokes" class="site-section">
+      <div style="text-align: center; margin-bottom: 2.5rem;">
+        <span class="sticker-badge">CONTEXT: NONE</span>
+        <h2 style="font-family: var(--font-display); font-size: 3rem; font-weight: 900; margin-top: 0.5rem;">INSIDE JOKES & LORE</h2>
+        <p style="color: var(--text-muted);">Things you cannot explain to an outsider without sounding entirely unhinged.</p>
+        <div style="margin-top: 1.2rem;">
+          <button class="btn-y2k btn-lime" onclick="generateRandomLore()">
+            <i class="fa-solid fa-wand-magic-sparkles"></i> Roll Random Inside Joke
+          </button>
+        </div>
+      </div>
+      <div class="jokes-grid" id="jokes-grid-container"></div>
+    </section>
+
+    <!-- Open When Letters Section -->
+    <section id="sec-letters" class="site-section">
+      <div style="text-align: center; margin-bottom: 2.5rem;">
+        <span class="sticker-badge">FOR WHEN LIFE GETS HEAVY</span>
+        <h2 style="font-family: var(--font-display); font-size: 3rem; font-weight: 900; margin-top: 0.5rem;">OPEN WHEN LETTERS</h2>
+        <p style="color: var(--text-muted);">Gentle reminders, comforting words, and virtual hugs sealed in envelopes.</p>
+      </div>
+      <div class="letters-grid" id="letters-grid-container"></div>
+    </section>
+
+    <!-- Future Time Capsule Section -->
+    <section id="sec-capsule" class="site-section">
+      <div style="text-align: center; margin-bottom: 2.5rem;">
+        <span class="sticker-badge">VAULT OF TOMORROW</span>
+        <h2 style="font-family: var(--font-display); font-size: 3rem; font-weight: 900; margin-top: 0.5rem;">FUTURE TIME CAPSULE</h2>
+        <p style="color: var(--text-muted);">
+          Write letters sealed until a specific date in the future.
+        </p>
+      </div>
+
+      <div class="capsule-form-card">
+        <h3 style="font-family: var(--font-display); margin-bottom: 1.2rem;">Deposit A Future Message</h3>
+        <form id="capsule-form" onsubmit="handleCapsuleSubmit(event)">
+          <div class="form-group">
+            <label>Your Name / Alias</label>
+            <input type="text" id="cap-author" class="form-control" placeholder="e.g. Maya" required>
+          </div>
+          <div class="form-group">
+            <label>Capsule Title</label>
+            <input type="text" id="cap-title" class="form-control" placeholder="e.g. To Us On Graduation Day" required>
+          </div>
+          <div class="form-group">
+            <label>Unlock Date</label>
+            <input type="date" id="cap-date" class="form-control" required>
+          </div>
+          <div class="form-group">
+            <label>Message Content</label>
+            <textarea id="cap-msg" class="form-control" rows="4" placeholder="What do you want your future self to remember?" required></textarea>
+          </div>
+          <button type="submit" class="btn-y2k btn-pink">
+            <i class="fa-solid fa-lock"></i> Lock Into Capsule
+          </button>
+        </form>
+      </div>
+
+      <h3 style="font-family: var(--font-display); margin-bottom: 1.5rem; text-align: center;">Active Vaults</h3>
+      <div class="capsule-list-grid" id="capsule-list-container"></div>
+    </section>
+  </main>
+
+  <!-- Persistent Lo-Fi Audio Player -->
+  <aside class="music-player-fixed" id="music-player-widget">
+    <button class="player-min-toggle" onclick="togglePlayerMinimize()" title="Minimize / Expand" aria-label="Minimize player">
+      <i class="fa-solid fa-chevron-down" id="player-min-icon"></i>
+    </button>
+    <div class="player-mini-trigger" onclick="togglePlayerMinimize()" title="Open Player">
+      <i class="fa-solid fa-music"></i>
+    </div>
+
+    <div class="player-full-content">
+      <div class="player-track-info">
+        <img src="https://images.unsplash.com/photo-1514525253161-7a46d19cd819?auto=format&fit=crop&w=150&q=80" alt="Cover" class="track-art" id="player-art" onerror="this.src='https://placehold.co/150x150/7000ff/ffffff?text=Music'">
+        <div class="track-meta">
+          <div class="title" id="player-title">Ribs (Friendship Anthem)</div>
+          <div class="artist" id="player-artist">Lorde — Lore Vibes</div>
+        </div>
+      </div>
+
+      <div class="visualizer-bars" id="audio-visualizer">
+        <div class="v-bar"></div><div class="v-bar"></div><div class="v-bar"></div><div class="v-bar"></div>
+        <div class="v-bar"></div><div class="v-bar"></div><div class="v-bar"></div><div class="v-bar"></div>
+        <div class="v-bar"></div><div class="v-bar"></div><div class="v-bar"></div><div class="v-bar"></div>
+      </div>
+
+      <div class="player-progress-container" onclick="seekAudio(event)">
+        <div class="player-progress-fill" id="player-progress"></div>
+      </div>
+
+      <div class="player-controls">
+        <button class="player-btn" onclick="prevTrack()" title="Previous Track"><i class="fa-solid fa-backward-step"></i></button>
+        <button class="player-btn play-pause-btn" onclick="togglePlayAudio()" title="Play / Pause">
+          <i class="fa-solid fa-play" id="play-pause-icon"></i>
+        </button>
+        <button class="player-btn" onclick="nextTrack()" title="Next Track"><i class="fa-solid fa-forward-step"></i></button>
+        <button class="player-btn" onclick="toggleMuteAudio()" title="Toggle Mute">
+          <i class="fa-solid fa-volume-high" id="volume-icon"></i>
+        </button>
+      </div>
+    </div>
+  </aside>
+
+  <audio id="global-audio" preload="auto"></audio>
+
+  <!-- Upload Lore Modal -->
+  <div class="upload-modal-overlay" id="upload-modal" onclick="closeUploadModal(event)">
+    <div class="upload-box" onclick="event.stopPropagation()">
+      <button class="lightbox-close" onclick="closeUploadModal()">&times;</button>
+      <span class="sticker-badge" style="margin-bottom: 0.8rem;">PERMANENT VAULT</span>
+      <h3 style="font-family: var(--font-display); font-size: 1.8rem; margin-bottom: 1rem;">DROP PHOTO / VIDEO</h3>
+      <form id="lore-upload-form" onsubmit="handleMediaUpload(event)">
+        <div class="form-group">
+          <label>Select Photo or Video (Max 50MB)</label>
+          <input type="file" id="media-file-input" class="form-control" accept="image/*,video/*" required>
+        </div>
+        <div class="form-group">
+          <label>Your Name / Nickname</label>
+          <input type="text" id="uploader-input" class="form-control" placeholder="e.g. Shivam" required>
+        </div>
+        <div class="form-group">
+          <label>Caption / Memory Note</label>
+          <input type="text" id="caption-input" class="form-control" placeholder="What happened here?" required>
+        </div>
+        <div class="form-group">
+          <label>Category</label>
+          <select id="category-input" class="form-control">
+            <option value="college">Campus Days</option>
+            <option value="trips">Roadtrips</option>
+            <option value="chaos">Pure Chaos</option>
+            <option value="golden">Golden Hours</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label>Squad Passcode PIN</label>
+          <input type="password" id="pin-input" class="form-control" placeholder="Enter squad PIN" required>
+        </div>
+        <button type="submit" id="upload-submit-btn" class="btn-y2k btn-pink" style="width: 100%; margin-top: 0.5rem;">
+          <i class="fa-solid fa-cloud-arrow-up"></i> Save Permanently 
+        </button>
+        <p id="upload-status" style="font-weight: 700; margin-top: 0.8rem; text-align: center; font-size: 0.85rem; color: var(--pink);"></p>
+      </form>
+    </div>
+  </div>
+
+  <!-- Image/Video Lightbox Modal -->
+  <div class="lightbox-overlay" id="lightbox" onclick="closeLightbox(event)">
+    <div class="lightbox-card" onclick="event.stopPropagation()">
+      <button class="lightbox-close" onclick="closeLightbox()">&times;</button>
+      <button class="lightbox-nav-btn lightbox-prev" onclick="changeLightboxImage(-1)">‹</button>
+      <button class="lightbox-nav-btn lightbox-next" onclick="changeLightboxImage(1)">›</button>
+      <div id="lightbox-media-wrapper">
+        <img id="lightbox-img" src="" alt="Enlarged view">
+      </div>
+      <div class="lightbox-info">
+        <div>
+          <h4 id="lightbox-title" style="font-family: var(--font-display); font-size: 1.2rem;">Memory Title</h4>
+          <p id="lightbox-caption" style="color: var(--text-muted); font-size: 0.9rem; margin-top: 0.2rem;">Location • Date</p>
+        </div>
+        <span class="sticker-badge" id="lightbox-tag">POLAROID</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Letter Open Modal -->
+  <div class="letter-modal" id="letter-modal" onclick="closeLetterModal(event)">
+    <div class="letter-paper" onclick="event.stopPropagation()">
+      <button class="letter-close-btn" onclick="closeLetterModal()">&times;</button>
+      <h2 id="modal-letter-title">Open When You Miss Us</h2>
+      <div id="modal-letter-body"></div>
+    </div>
+  </div>
+
+  <!-- Friends Detail Modal -->
+  <div class="letter-modal" id="friend-detail-modal" onclick="closeFriendModal(event)">
+    <div class="letter-paper" onclick="event.stopPropagation()" style="font-family: var(--font-body); font-size: 1rem;">
+      <button class="letter-close-btn" onclick="closeFriendModal()">&times;</button>
+      <div id="friend-modal-content"></div>
+    </div>
+  </div>
+
+  <footer style="border-top: 2px solid var(--border-color); background: var(--bg-alt); padding: 3rem 1.5rem; text-align: center; margin-top: 4rem;">
+    <div style="max-width: 800px; margin: 0 auto;">
+      <span class="sticker-badge" style="background: var(--pink); color: #fff;">EST. HOSTEL ERA</span>
+      <h3 style="font-family: var(--font-display); font-size: 1.8rem; margin: 1rem 0 0.5rem;">OUR LORE DOESN'T END HERE</h3>
+      <p style="color: var(--text-muted); font-size: 0.95rem; margin-bottom: 1.5rem;">
+        Made with infinite inside jokes, 3 AM chai, and memories that will survive every season of life.
+      </p>
+      <div style="font-family: var(--font-mono); font-size: 0.9rem; color: var(--text-muted);">
+        PRESS <kbd style="background: var(--card-bg); border: 1px solid var(--border-color); padding: 2px 6px; border-radius: 4px;">L</kbd> <kbd style="background: var(--card-bg); border: 1px solid var(--border-color); padding: 2px 6px; border-radius: 4px;">O</kbd> <kbd style="background: var(--card-bg); border: 1px solid var(--border-color); padding: 2px 6px; border-radius: 4px;">R</kbd> <kbd style="background: var(--card-bg); border: 1px solid var(--border-color); padding: 2px 6px; border-radius: 4px;">E</kbd> ANYWHERE FOR SECRET CONFETTI
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    const API_BASE_URL = 'http://localhost:5000/api';
+    const FRIENDSHIP_START_DATE = new Date('2024-08-15T00:00:00');
+
+    // Squad Friends Data
+    const FRIENDS_DATA = [
+      {
+        id: 'friend-1',
+        name: 'Shivam Singh',
+        nickname: 'The Architect',
+        role: 'Always Confused🤔',
+        birthday: 'Apr 24',
+        personality: 'INFJ / Codes at 2 AM, plays acoustic chords at 3 AM',
+        favoriteQuote: '“Trust the process, push to main, and grab chai.”',
+        favoriteSong: 'Vienna — Billy Joel',
+        iconicMemory: 'Built this entire memory vault so the squad never forgets a single moment.',
+        image: 'assets/friends/shivam.jpeg' ,
+      },
+      {
+        id: 'friend-2',
+        name: 'Satyam',
+        nickname: 'Late Legend',
+        role: 'Hostel Navigator & Meme Head',
+        birthday: 'Mar 22',
+        personality: 'ENTP / Says "Main raste mein hoon" while still fast asleep in bed',
+        favoriteQuote: '“Bhai Campa Le Lete Hai😈.”',
+        favoriteSong: 'Supercut — Lorde',
+        iconicMemory: 'Got lost on a 15-minute chai run and returned with 4 whole pizzas.',
+        image: 'assets/friends/satyam.jpeg' ,
+      },
+      {
+        id: 'friend-3',
+        name: 'Krish',
+        nickname: 'Snack Master',
+        role: 'Chief Food Officer',
+        birthday: 'Jul 08',
+        personality: 'ESTP / Orders food right after saying "bro I have no money left"',
+        favoriteQuote: '“Tu bas order kar, main pakka UPI kar doonga.”',
+        favoriteSong: 'Cruel Summer — Taylor Swift',
+        iconicMemory: 'Cooked Maggi at 4 AM for the entire room right before semester exams.',
+        image: 'assets/friends/krish.jpeg' ,
+      },
+      {
+        id: 'friend-4',
+        name: 'Aryan',
+        nickname: 'Room Philosopher',
+        role: 'Tharki',
+        birthday: 'Dec 03',
+        personality: 'ISFP / Gives profound life advice 10 minutes before the end-sem exam',
+        favoriteQuote: '“Bhai Yo Ladki Dekh 🫦 ”',
+        favoriteSong: 'Tongue Tied — GROUPLOVE',
+        iconicMemory: 'Played the exact perfect beat drop as the sunrise broke over the hostel roof.',
+        image: 'assets/friends/aryan.jpeg' ,
+      }
+    ];
+
+    // Baseline Seed Memories (Blended with live MongoDB uploads)
+    let MEMORIES_DATA = [
+      {
+        id: 'seed-1',
+        title: 'Golden Hour Rooftop',
+        category: 'golden',
+        date: 'Sept 2024',
+        location: 'Hostel Roof',
+        caption: 'When we promised to always celebrate the small wins.',
+        image: 'https://images.unsplash.com/photo-1529156069898-49953e39b3ac?auto=format&fit=crop&w=800&q=80',
+        image: 'assets/friends/satyam.jpeg' ,
+      },
+      {
+        id: 'seed-2',
+        title: 'Spontaneous Highway Dhaba',
+        category: 'trips',
+        date: 'Nov 2024',
+        location: 'Highway Route 9',
+        caption: 'Hot parathas at 3:30 AM with cold winter air.',
+        image: 'https://images.unsplash.com/photo-1506869640319-fe1a24fd76dc?auto=format&fit=crop&w=800&q=80',
+        mediaType: 'image'
+      },
+      {
+        id: 'seed-3',
+        title: 'Exam Season Chaos',
+        category: 'college',
+        date: 'Dec 2024',
+        location: 'Room 304',
+        caption: 'Studying for finals quickly degraded into making paper airplanes.',
+        image: 'https://images.unsplash.com/photo-1523240795612-9a054b0db644?auto=format&fit=crop&w=800&q=80',
+        mediaType: 'image'
+      },
+      {
+        id: 'seed-4',
+        title: 'The Great Pancake Catastrophe',
+        category: 'chaos',
+        date: 'Feb 2025',
+        location: 'Hostel Kitchen',
+        caption: 'Flour on the fan. Nobody knows how it got up there.',
+        image: 'https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?auto=format&fit=crop&w=800&q=80',
+        mediaType: 'image'
+      }
+    ];
+
+    const TIMELINE_DATA = [
+      {
+        date: 'August 2024',
+        title: 'Day Zero: The First Meet',
+        story: 'Four strangers walked into Room 304. Within 48 hours, it was complete and permanent chaos.',
+        image: 'assets/timeline/event2.jpeg' ,
+      },
+      {
+        date: 'November 2024',
+        title: 'The All-Nighter Engineering Cram',
+        story: 'Finished a 5-unit syllabus in 4 hours on black coffee and sheer panic.',
+        image: 'https://images.unsplash.com/photo-1511632765486-a01980e01a18?auto=format&fit=crop&w=600&q=80'
+      },
+      {
+        date: 'March 2025',
+        title: 'The Spontaneous Trip',
+        story: 'Packed bags in 15 minutes, caught the train, and lived like kings on a student budget.',
+        image: 'assets/timeline/event4.jpeg' ,
+      },
+      {
+        date: 'Present Day',
+        title: 'The Lore Vault Is Eternal',
+        story: 'Every photo, joke, and memory now permanently recorded to the cloud.',
+        image: 'https://images.unsplash.com/photo-1511632765486-a01980e01a18?auto=format&fit=crop&w=600&q=80'
+      }
+    ];
+
+    const JOKES_DATA = [
+      {
+        tag: 'HOSTEL LORE',
+        quote: '“Who placed a frozen waffle inside the air conditioning vent?”',
+        origin: 'Exam Week 2024 — Remains an unsolved mystery to this day.',
+        reactions: { '🧇': 14, '💀': 29, '😭': 8 }
+      },
+      {
+        tag: 'ROADTRIP',
+        quote: '“GPS says turn right into the lake. Should we trust it?”',
+        origin: 'Somewhere outside town when cell towers dropped completely.',
+        reactions: { '🌊': 19, '🚗': 22, '👀': 15 }
+      },
+      {
+        tag: 'GROUP CHAT',
+        quote: '“Bhai tu order kar de, main pakka kal subah GPay karta hoon.”',
+        origin: 'Payment arrives 3-5 business weeks later.',
+        reactions: { '💸': 42, '🍕': 31, '☕': 19 }
+      },
+      {
+        tag: 'LEGENDARY',
+        quote: '“It’s not late, it’s early for tomorrow.”',
+        origin: 'Standard rationalization for eating Maggi at 4:15 AM.',
+        reactions: { '🍜': 50, '⏰': 18, '🔥': 27 }
+      }
+    ];
+
+    const LETTERS_DATA = [
+      {
+        title: 'Open When You’re Stressed',
+        snippet: 'A gentle reminder that cloudy skies pass and you are never alone.',
+        content: `Hey bestie,\n\nIf you're opening this, I know today is heavy. Take a deep breath. Drop your shoulders away from your ears and unclench your jaw.\n\nYou have survived 100% of your worst days so far, and this one will not defeat you either. We love you for who you are right now—not who you feel like you need to become.\n\nWhenever you are ready, call us. We will sit on call in total silence or listen to you rant for hours. You are never a burden to this squad.\n\nAlways with you,\nThe Squad.`
+      },
+      {
+        title: 'Open When You Miss The Boys',
+        snippet: 'For when distance or busy semester schedules feel a little too quiet.',
+        content: `Dear friend,\n\nLife gets busy and schedules are messy, but space means nothing when our lore runs this deep.\n\nClose your eyes and remember: the time we sang out of tune on the highway, the uncontrollable laughing fits at 3 AM over nothing, and how we can look across a crowded room and immediately know what each other is thinking.\n\nWe are only a single text away. Drop a stupid meme in the group chat right now.\n\nAlways here.`
+      },
+      {
+        title: 'Open When You Need Instant Serotonin',
+        snippet: 'Guaranteed laughter straight from our Room 304 archives.',
+        content: `Emergency serotonin protocol activated:\n\n1. Remember Satyam swearing he was '2 minutes away' while fast asleep in bed?\n2. Remember Krish cooking Maggi with a hair dryer when the induction stopped working?\n3. You are brilliant, resilient, and deeply unserious.\n\nNow smile and go drink a glass of water!`
+      },
+      {
+        title: 'Open When College / Work Feels Impossible',
+        snippet: 'When burnout strikes and you need a perspective shift.',
+        content: `Deep breath.\n\nNo test score, no corporate email, no job interview defines your human worth. In five years, nobody is going to ask what happened on this random Tuesday.\n\nWork hard because you care about your dreams, but never sacrifice your peace for things that don't love you back. We believe in you more than you currently believe in yourself.\n\nGo take a walk. We've got your back always.`
+      }
+    ];
+// 5 Handpicked Friendship Anthems (3 Hindi + 2 English)
+   // 5 Handpicked Friendship Anthems (3 Hindi + 2 English)
+    const PLAYLIST = [
+      {
+        title: 'Yaaron (Dosti)',
+        artist: 'KK — Forever College Anthem',
+        src: 'assets/audio/song1.mp3',
+        art: 'https://images.unsplash.com/photo-1529156069898-49953e39b3ac?auto=format&fit=crop&w=150&q=80'
+      },
+      {
+        title: 'Woh Din',
+        artist: 'Arijit Singh — Chhichhore (Hostel Lore)',
+        src: 'assets/audio/song2.mp3',
+        art: 'https://images.unsplash.com/photo-1523240795612-9a054b0db644?auto=format&fit=crop&w=150&q=80'
+      },
+      {
+        title: 'Dil Chahta Hai',
+        artist: 'Shankar Mahadevan — Roadtrip Vibes',
+        src: 'assets/audio/song3.mp3',
+        art: 'https://images.unsplash.com/photo-1469854523086-cc02fe5d8800?auto=format&fit=crop&w=150&q=80'
+      },
+      {
+        title: 'Ribs',
+        artist: 'Lorde — Growing Up Together',
+        src: 'assets/audio/song4.mp3',
+        art: 'https://images.unsplash.com/photo-1514525253161-7a46d19cd819?auto=format&fit=crop&w=150&q=80'
+      },
+      {
+        title: 'Tongue Tied',
+        artist: 'GROUPLOVE — Never Let Me Go',
+        src: 'assets/audio/song5.mp3',
+        art: 'https://images.unsplash.com/photo-1511632765486-a01980e01a18?auto=format&fit=crop&w=150&q=80'
+      }
+    ];
+    let currentTrackIndex = 0;
+    let isPlaying = false;
+    let currentLightboxIndex = 0;
+    let activeCategory = 'all';
+
+    const audioElement = document.getElementById('global-audio');
+
+    // On Load Lifecycle
+    window.addEventListener('DOMContentLoaded', () => {
+      initCursor();
+      initCounters();
+      renderFriends();
+      renderTimeline();
+      renderJokes();
+      renderLetters();
+      loadTimeCapsules();
+      setupEasterEggs();
+      setupAudioListeners();
+      applySavedTheme();
+      syncLiveMemories(); // Connects to MongoDB Atlas backend
+    });
+
+    // 1. Live MongoDB & Cloudinary Sync
+    async function syncLiveMemories() {
+      try {
+        const res = await fetch(`${API_BASE_URL}/memories`);
+        if (res.ok) {
+          const cloudMemories = await res.json();
+          if (cloudMemories && cloudMemories.length > 0) {
+            const mapped = cloudMemories.map(m => ({
+              id: m._id,
+              title: m.caption || 'Live Lore Snap',
+              category: m.category || 'chaos',
+              date: new Date(m.createdAt).toLocaleDateString('en-US', { month: 'short', year: 'numeric' }),
+              location: `@${m.uploader || 'Squad'}`,
+              caption: m.caption || '',
+              image: m.url,
+              mediaType: m.mediaType || 'image'
+            }));
+            // Merge cloud memories with default memories
+            MEMORIES_DATA = [...mapped, ...MEMORIES_DATA];
+          }
+        }
+      } catch (err) {
+        console.warn('Backend server not connected yet. Displaying local seed memories.');
+      } finally {
+        renderFilmstrip();
+        renderGallery();
+        const countEl = document.getElementById('stat-mem-count');
+        if (countEl) countEl.innerText = MEMORIES_DATA.length;
+      }
+    }
+
+    // 2. Upload Modal Handlers
+    function openUploadModal() {
+      document.getElementById('upload-modal').classList.add('active');
+    }
+
+    function closeUploadModal(e) {
+      if (!e || e.target.id === 'upload-modal' || e.target.classList.contains('lightbox-close')) {
+        document.getElementById('upload-modal').classList.remove('active');
+        document.getElementById('upload-status').innerText = '';
+      }
+    }
+
+    async function handleMediaUpload(e) {
+      e.preventDefault();
+      const fileInput = document.getElementById('media-file-input');
+      const uploader = document.getElementById('uploader-input').value.trim();
+      const caption = document.getElementById('caption-input').value.trim();
+      const category = document.getElementById('category-input').value;
+      const pin = document.getElementById('pin-input').value.trim();
+      const statusEl = document.getElementById('upload-status');
+      const submitBtn = document.getElementById('upload-submit-btn');
+
+      if (!fileInput.files[0]) {
+        statusEl.innerText = 'Please select a photo or video!';
+        return;
+      }
+
+      const formData = new FormData();
+      formData.append('mediaFile', fileInput.files[0]);
+      formData.append('uploader', uploader);
+      formData.append('caption', caption);
+      formData.append('category', category);
+      formData.append('pin', pin);
+
+      submitBtn.disabled = true;
+      statusEl.innerText = 'Uploading to Cloudinary & saving in MongoDB... ⏳';
+
+      try {
+        const res = await fetch(`${API_BASE_URL}/upload`, {
+          method: 'POST',
+          body: formData
+        });
+        const data = await res.json();
+
+        if (!res.ok) throw new Error(data.error || 'Upload failed');
+
+        statusEl.innerText = 'Saved to vault forever! ✨';
+        fireConfetti();
+
+        setTimeout(() => {
+          closeUploadModal();
+          document.getElementById('lore-upload-form').reset();
+          submitBtn.disabled = false;
+          syncLiveMemories();
+        }, 1200);
+
+      } catch (err) {
+        statusEl.innerText = `Error: ${err.message}`;
+        submitBtn.disabled = false;
+      }
+    }
+
+    function initCursor() {
+      const cursor = document.getElementById('custom-cursor');
+      const dot = document.getElementById('cursor-dot');
+      if (!cursor || !dot) return;
+
+      window.addEventListener('mousemove', (e) => {
+        dot.style.left = e.clientX + 'px';
+        dot.style.top = e.clientY + 'px';
+        cursor.animate({
+          left: `${e.clientX}px`,
+          top: `${e.clientY}px`
+        }, { duration: 250, fill: "forwards" });
+      });
+
+      const interactiveElements = document.querySelectorAll('button, a, .friend-card, .polaroid-card, .envelope-card, input, textarea, select');
+      interactiveElements.forEach(el => {
+        el.addEventListener('mouseenter', () => cursor.classList.add('cursor-hover'));
+        el.addEventListener('mouseleave', () => cursor.classList.remove('cursor-hover'));
+      });
+    }
+
+    function switchSection(sectionId) {
+      const sections = document.querySelectorAll('.site-section');
+      sections.forEach(sec => sec.classList.remove('active'));
+
+      const targetSection = document.getElementById(`sec-${sectionId}`);
+      if (targetSection) {
+        targetSection.classList.add('active');
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      }
+
+      const navLinks = document.querySelectorAll('.nav-link');
+      navLinks.forEach(link => {
+        if (link.textContent.toLowerCase().includes(sectionId.substring(0, 4))) {
+          link.classList.add('active');
+        } else {
+          link.classList.remove('active');
+        }
+      });
+    }
+
+    function toggleMobileNav() {
+      const drawer = document.getElementById('mobile-drawer');
+      drawer.style.display = (drawer.style.display === 'none' || !drawer.style.display) ? 'flex' : 'none';
+    }
+
+    function toggleTheme() {
+      const currentTheme = document.documentElement.getAttribute('data-theme') || 'light';
+      const newTheme = currentTheme === 'light' ? 'dark' : 'light';
+      document.documentElement.setAttribute('data-theme', newTheme);
+      localStorage.setItem('ourlore_theme', newTheme);
+
+      const icon = document.getElementById('theme-icon');
+      if (newTheme === 'dark') {
+        icon.className = 'fa-solid fa-sun';
+        showToast('🌙 Dark mode enabled');
+      } else {
+        icon.className = 'fa-solid fa-moon';
+        showToast('☀️ Light mode enabled');
+      }
+    }
+
+    function applySavedTheme() {
+      const savedTheme = localStorage.getItem('ourlore_theme');
+      if (savedTheme) {
+        document.documentElement.setAttribute('data-theme', savedTheme);
+        const icon = document.getElementById('theme-icon');
+        if (icon) icon.className = savedTheme === 'dark' ? 'fa-solid fa-sun' : 'fa-solid fa-moon';
+      }
+    }
+
+    function initCounters() {
+      function updateTimer() {
+        const now = new Date();
+        const diffMs = now - FRIENDSHIP_START_DATE;
+
+        const totalSecs = Math.floor(diffMs / 1000);
+        const days = Math.floor(totalSecs / (3600 * 24));
+        const hours = Math.floor((totalSecs % (3600 * 24)) / 3600);
+        const minutes = Math.floor((totalSecs % 3600) / 60);
+        const seconds = totalSecs % 60;
+
+        document.getElementById('cnt-days').textContent = String(days).padStart(3, '0');
+        document.getElementById('cnt-hours').textContent = String(hours).padStart(2, '0');
+        document.getElementById('cnt-minutes').textContent = String(minutes).padStart(2, '0');
+        document.getElementById('cnt-seconds').textContent = String(seconds).padStart(2, '0');
+      }
+      updateTimer();
+      setInterval(updateTimer, 1000);
+    }
+
+    function renderFriends() {
+      const container = document.getElementById('friends-card-grid');
+      if (!container) return;
+      container.innerHTML = FRIENDS_DATA.map(friend => `
+        <div class="friend-card" onclick="openFriendModal('${friend.id}')">
+          <div class="avatar-wrap">
+            <img src="${friend.image}" alt="${friend.name}">
+            <div class="friend-badge">${friend.birthday}</div>
+          </div>
+          <h3>${friend.name} <span class="nickname">${friend.nickname}</span></h3>
+          <div class="role">${friend.role}</div>
+          <div class="quote-snippet">${friend.favoriteQuote}</div>
+        </div>
+      `).join('');
+    }
+
+    function openFriendModal(friendId) {
+      const friend = FRIENDS_DATA.find(f => f.id === friendId);
+      if (!friend) return;
+      const modal = document.getElementById('friend-detail-modal');
+      const content = document.getElementById('friend-modal-content');
+
+      content.innerHTML = `
+        <div style="text-align: center; margin-bottom: 1.5rem;">
+          <img src="${friend.image}" style="width: 120px; height: 120px; border-radius: 50%; object-fit: cover; border: 3px solid var(--border-color); margin: 0 auto 0.8rem; display: block;">
+          <h2 style="font-family: var(--font-display); font-size: 1.8rem; margin: 0;">${friend.name}</h2>
+          <span class="sticker-badge" style="margin-top: 0.4rem;">${friend.role}</span>
+        </div>
+        <p><strong>🎂 Birthday:</strong> ${friend.birthday}</p>
+        <p><strong>🧠 Personality Lore:</strong> ${friend.personality}</p>
+        <p><strong>🎵 Favorite Anthem:</strong> ${friend.favoriteSong}</p>
+        <p style="margin-top: 1rem; padding: 1rem; background: var(--bg-alt); border-radius: 8px; border: 1px dashed var(--border-color);">
+          <strong>⭐ Iconic Memory:</strong><br>${friend.iconicMemory}
+        </p>
+      `;
+      modal.classList.add('active');
+    }
+
+    function closeFriendModal(e) {
+      if (!e || e.target.id === 'friend-detail-modal' || e.target.classList.contains('letter-close-btn')) {
+        document.getElementById('friend-detail-modal').classList.remove('active');
+      }
+    }
+function renderFilmstrip() {
+  const strip = document.getElementById('filmstrip-row');
+  if (!strip) return;
+
+  const items = MEMORIES_DATA.length ? MEMORIES_DATA : [];
+  if (!items.length) return;
+
+  // Duplicate items array to make the seamless infinite scroll loop
+  const loopList = [...items, ...items];
+
+  strip.innerHTML = `
+    <div class="filmstrip-track">
+      ${loopList.map((mem, idx) => {
+        const originalIndex = idx % items.length;
+        const mediaHtml = mem.mediaType === 'video'
+          ? `<video src="${mem.image}" muted preload="metadata"></video>`
+          : `<img src="${mem.image}" alt="${mem.title}" loading="lazy">`;
+
+        return `
+          <div class="filmstrip-cell" onclick="openLightbox(${originalIndex})">
+            <div class="filmstrip-sprockets">
+              <div class="sprocket-hole"></div><div class="sprocket-hole"></div>
+              <div class="sprocket-hole"></div><div class="sprocket-hole"></div>
+            </div>
+            ${mediaHtml}
+            <div style="color: #fff; font-family: var(--font-mono); font-size: 0.75rem; margin-top: 6px; text-align: center;">
+              FRAME #${originalIndex + 1}
+            </div>
+          </div>
+        `;
+      }).join('')}
+    </div>
+  `;
+}
+
+    function renderGallery() {
+      const container = document.getElementById('gallery-masonry-container');
+      if (!container) return;
+
+      const filtered = MEMORIES_DATA.filter(m => activeCategory === 'all' || m.category === activeCategory);
+      container.innerHTML = filtered.map((item) => {
+        const globalIdx = MEMORIES_DATA.findIndex(x => x.id === item.id);
+        const mediaTag = item.mediaType === 'video'
+          ? `<video src="${item.image}" muted preload="metadata" style="pointer-events:none;"></video>`
+          : `<img src="${item.image}" alt="${item.title}" loading="lazy">`;
+
+        return `
+          <div class="gallery-item polaroid-card" onclick="openLightbox(${globalIdx})">
+            <div class="tape tape-top-center"></div>
+            ${mediaTag}
+            <div class="polaroid-caption">${item.title}</div>
+            <div style="font-size: 0.8rem; text-align: center; color: var(--text-muted); margin-top: 4px;">
+              ${item.location} • ${item.date}
+            </div>
+          </div>
+        `;
+      }).join('');
+    }
+
+    function filterGallery(category, btnElement) {
+      activeCategory = category;
+      document.querySelectorAll('#gallery-filters .filter-btn').forEach(btn => btn.classList.remove('active'));
+      if (btnElement) btnElement.classList.add('active');
+      renderGallery();
+    }
+
+    function handleGallerySearch() {
+      const query = document.getElementById('gallery-search').value.toLowerCase();
+      const container = document.getElementById('gallery-masonry-container');
+      const filtered = MEMORIES_DATA.filter(m => 
+        m.title.toLowerCase().includes(query) || 
+        m.caption.toLowerCase().includes(query) || 
+        m.location.toLowerCase().includes(query)
+      );
+
+      container.innerHTML = filtered.map((item) => {
+        const globalIdx = MEMORIES_DATA.findIndex(x => x.id === item.id);
+        const mediaTag = item.mediaType === 'video'
+          ? `<video src="${item.image}" muted preload="metadata"></video>`
+          : `<img src="${item.image}" alt="${item.title}">`;
+
+        return `
+          <div class="gallery-item polaroid-card" onclick="openLightbox(${globalIdx})">
+            ${mediaTag}
+            <div class="polaroid-caption">${item.title}</div>
+            <div style="font-size: 0.8rem; text-align: center; color: var(--text-muted); margin-top: 4px;">
+              ${item.location} • ${item.date}
+            </div>
+          </div>
+        `;
+      }).join('');
+    }
+
+    function openLightbox(index) {
+      currentLightboxIndex = index;
+      const mem = MEMORIES_DATA[index];
+      if (!mem) return;
+
+      const mediaWrapper = document.getElementById('lightbox-media-wrapper');
+      if (mem.mediaType === 'video') {
+        mediaWrapper.innerHTML = `<video controls autoplay src="${mem.image}" style="width:100%; max-height:60vh; background:#000; border-radius:6px;"></video>`;
+      } else {
+        mediaWrapper.innerHTML = `<img id="lightbox-img" src="${mem.image}" alt="Enlarged view">`;
+      }
+
+      document.getElementById('lightbox-title').textContent = mem.title;
+      document.getElementById('lightbox-caption').textContent = `${mem.location} • ${mem.date} — "${mem.caption}"`;
+      document.getElementById('lightbox-tag').textContent = mem.category.toUpperCase();
+      document.getElementById('lightbox').classList.add('active');
+    }
+
+    function closeLightbox(e) {
+      if (!e || e.target.id === 'lightbox' || e.target.classList.contains('lightbox-close')) {
+        const video = document.querySelector('#lightbox-media-wrapper video');
+        if (video) video.pause();
+        document.getElementById('lightbox').classList.remove('active');
+      }
+    }
+
+    function changeLightboxImage(direction) {
+      currentLightboxIndex = (currentLightboxIndex + direction + MEMORIES_DATA.length) % MEMORIES_DATA.length;
+      openLightbox(currentLightboxIndex);
+    }
+
+    window.addEventListener('keydown', (e) => {
+      const lb = document.getElementById('lightbox');
+      if (lb && lb.classList.contains('active')) {
+        if (e.key === 'ArrowLeft') changeLightboxImage(-1);
+        if (e.key === 'ArrowRight') changeLightboxImage(1);
+        if (e.key === 'Escape') closeLightbox();
+      }
+    });
+
+    function renderTimeline() {
+      const container = document.getElementById('timeline-events-container');
+      if (!container) return;
+      container.innerHTML = TIMELINE_DATA.map((event, index) => {
+        const side = index % 2 === 0 ? 'left' : 'right';
+        return `
+          <div class="timeline-event ${side}">
+            <div class="timeline-dot"></div>
+            <div class="timeline-content-card">
+              <span class="timeline-date-tag">${event.date}</span>
+              <h3 style="font-family: var(--font-display); font-size: 1.3rem; margin: 0.4rem 0;">${event.title}</h3>
+              <p style="color: var(--text-muted); font-size: 0.95rem; line-height: 1.5;">${event.story}</p>
+              <img src="${event.image}" alt="${event.title}" class="timeline-img">
+            </div>
+          </div>
+        `;
+      }).join('');
+    }
+
+    function renderJokes() {
+      const container = document.getElementById('jokes-grid-container');
+      if (!container) return;
+      container.innerHTML = JOKES_DATA.map((joke, idx) => `
+        <div class="joke-bubble-card">
+          <div>
+            <div class="joke-tag">${joke.tag}</div>
+            <div class="joke-quote">${joke.quote}</div>
+          </div>
+          <div>
+            <div class="joke-origin">${joke.origin}</div>
+            <div class="joke-reactions">
+              ${Object.entries(joke.reactions).map(([emoji, count]) => `
+                <div class="react-pill" onclick="incrementJokeReact(${idx}, '${emoji}', this)">${emoji}${count}</div>
+              `).join('')}
+            </div>
+          </div>
+        </div>
+      `).join('');
+    }
+
+    function incrementJokeReact(jokeIdx, emoji, el) {
+      if (JOKES_DATA[jokeIdx] && JOKES_DATA[jokeIdx].reactions[emoji] !== undefined) {
+        JOKES_DATA[jokeIdx].reactions[emoji]++;
+        el.textContent = `${emoji} ${JOKES_DATA[jokeIdx].reactions[emoji]}`;
+        showToast('Reacted! ❤️');
+      }
+    }
+
+    function generateRandomLore() {
+      const randomJoke = JOKES_DATA[Math.floor(Math.random() * JOKES_DATA.length)];
+      showToast(`✨ Lore: ${randomJoke.quote}`);
+      fireConfetti();
+    }
+
+    function renderLetters() {
+      const container = document.getElementById('letters-grid-container');
+      if (!container) return;
+      container.innerHTML = LETTERS_DATA.map((letObj, idx) => `
+        <div class="envelope-card" onclick="openLetterModal(${idx})">
+          <div class="envelope-stamp">AIR MAIL</div>
+          <i class="fa-solid fa-envelope-open-text envelope-icon"></i>
+          <h3 class="envelope-title">${letObj.title}</h3>
+          <p style="color: var(--text-muted); font-size: 0.9rem;">${letObj.snippet}</p>
+        </div>
+      `).join('');
+    }
+
+    function openLetterModal(idx) {
+      const letter = LETTERS_DATA[idx];
+      if (!letter) return;
+      const modal = document.getElementById('letter-modal');
+      const titleEl = document.getElementById('modal-letter-title');
+      const bodyEl = document.getElementById('modal-letter-body');
+
+      titleEl.textContent = letter.title;
+      bodyEl.innerHTML = '';
+      modal.classList.add('active');
+
+      let i = 0;
+      const text = letter.content;
+      function typeChar() {
+        if (i < text.length) {
+          if (text.charAt(i) === '\n') {
+            bodyEl.innerHTML += '<br>';
+          } else {
+            bodyEl.innerHTML += text.charAt(i);
+          }
+          i++;
+          setTimeout(typeChar, 14);
+        }
+      }
+      typeChar();
+    }
+
+    function closeLetterModal(e) {
+      if (!e || e.target.id === 'letter-modal' || e.target.classList.contains('letter-close-btn')) {
+        document.getElementById('letter-modal').classList.remove('active');
+      }
+    }
+
+    function handleCapsuleSubmit(e) {
+      e.preventDefault();
+      const author = document.getElementById('cap-author').value.trim();
+      const title = document.getElementById('cap-title').value.trim();
+      const date = document.getElementById('cap-date').value;
+      const msg = document.getElementById('cap-msg').value.trim();
+
+      if (!author || !title || !date || !msg) {
+        showToast('Please fill all fields!');
+        return;
+      }
+
+      const newCapsule = {
+        id: 'capsule_' + Date.now(),
+        author,
+        title,
+        unlockDate: date,
+        message: msg,
+        createdDate: new Date().toISOString()
+      };
+
+      const capsules = JSON.parse(localStorage.getItem('ourlore_capsules') || '[]');
+      capsules.push(newCapsule);
+      localStorage.setItem('ourlore_capsules', JSON.stringify(capsules));
+
+      showToast('🔒 Message locked into Time Capsule!');
+      document.getElementById('capsule-form').reset();
+      loadTimeCapsules();
+      fireConfetti();
+    }
+
+    function loadTimeCapsules() {
+      const container = document.getElementById('capsule-list-container');
+      if (!container) return;
+      const capsules = JSON.parse(localStorage.getItem('ourlore_capsules') || '[]');
+
+      if (capsules.length === 0) {
+        container.innerHTML = `
+          <div style="grid-column: 1/-1; text-align: center; color: var(--text-muted); padding: 2rem;">
+            No sealed capsules yet. Be the first to seal a message for tomorrow!
+          </div>
+        `;
+        return;
+      }
+
+      const today = new Date().toISOString().split('T')[0];
+
+      container.innerHTML = capsules.map(cap => {
+        const isUnlocked = today >= cap.unlockDate;
+        return `
+          <div class="capsule-item-card">
+            <div class="capsule-lock-status ${isUnlocked ? 'status-unlocked' : 'status-locked'}">
+              <i class="fa-solid ${isUnlocked ? 'fa-lock-open' : 'fa-lock'}"></i>
+              ${isUnlocked ? 'READY TO READ' : 'LOCKED UNTIL ' + cap.unlockDate}
+            </div>
+            <h4 style="font-family: var(--font-display); font-size: 1.2rem;">${cap.title}</h4>
+            <div style="font-size: 0.85rem; color: var(--text-muted); margin-bottom: 0.8rem;">By ${cap.author}</div>
+            ${isUnlocked ? `
+              <p style="font-family: var(--font-hand); font-size: 1.3rem; line-height: 1.4; background: var(--bg-alt); padding: 0.8rem; border-radius: 8px;">
+                "${cap.message}"
+              </p>
+            ` : `
+              <p style="font-style: italic; color: var(--text-muted); font-size: 0.9rem;">
+                This message is locked in time. Come back on ${cap.unlockDate} to unlock the lore!
+              </p>
+            `}
+          </div>
+        `;
+      }).join('');
+    }
+
+    function setupAudioListeners() {
+      audioElement.addEventListener('timeupdate', () => {
+        if (audioElement.duration) {
+          const pct = (audioElement.currentTime / audioElement.duration) * 100;
+          document.getElementById('player-progress').style.width = `${pct}%`;
+        }
+      });
+
+      audioElement.addEventListener('ended', () => {
+        nextTrack();
+      });
+
+      setInterval(() => {
+        if (isPlaying) {
+          const bars = document.querySelectorAll('.v-bar');
+          bars.forEach(b => {
+            b.style.height = `${Math.floor(Math.random() * 14) + 3}px`;
+          });
+        }
+      }, 150);
+    }
+
+    function loadTrack(index) {
+      currentTrackIndex = index;
+      const track = PLAYLIST[index];
+      audioElement.src = track.src;
+      document.getElementById('player-title').textContent = track.title;
+      document.getElementById('player-artist').textContent = track.artist;
+      document.getElementById('player-art').src = track.art;
+    }
+
+    function togglePlayAudio() {
+      if (isPlaying) {
+        audioElement.pause();
+        isPlaying = false;
+        document.getElementById('play-pause-icon').className = 'fa-solid fa-play';
+      } else {
+        audioElement.play().then(() => {
+          isPlaying = true;
+          document.getElementById('play-pause-icon').className = 'fa-solid fa-pause';
+        }).catch(() => {
+          showToast('Click play again to start audio');
+        });
+      }
+    }
+
+    function nextTrack() {
+      currentTrackIndex = (currentTrackIndex + 1) % PLAYLIST.length;
+      loadTrack(currentTrackIndex);
+      if (isPlaying) audioElement.play();
+    }
+
+    function prevTrack() {
+      currentTrackIndex = (currentTrackIndex - 1 + PLAYLIST.length) % PLAYLIST.length;
+      loadTrack(currentTrackIndex);
+      if (isPlaying) audioElement.play();
+    }
+
+    function toggleMuteAudio() {
+      audioElement.muted = !audioElement.muted;
+      const icon = document.getElementById('volume-icon');
+      icon.className = audioElement.muted ? 'fa-solid fa-volume-xmark' : 'fa-solid fa-volume-high';
+    }
+
+    function seekAudio(e) {
+      const container = e.currentTarget;
+      const rect = container.getBoundingClientRect();
+      const clickX = e.clientX - rect.left;
+      const ratio = clickX / rect.width;
+      if (audioElement.duration) {
+        audioElement.currentTime = ratio * audioElement.duration;
+      }
+    }
+
+    function togglePlayerMinimize() {
+      const player = document.getElementById('music-player-widget');
+      player.classList.toggle('minimized');
+      const icon = document.getElementById('player-min-icon');
+      icon.className = player.classList.contains('minimized') ? 'fa-solid fa-chevron-up' : 'fa-solid fa-chevron-down';
+    }
+
+    function enterSite(withAudio) {
+      document.getElementById('entry-gate').style.display = 'none';
+      loadTrack(0);
+      if (withAudio) {
+        audioElement.play().then(() => {
+          isPlaying = true;
+          document.getElementById('play-pause-icon').className = 'fa-solid fa-pause';
+          showToast('🎶 Music playing! Enjoy the lore.');
+        }).catch(() => {
+          showToast('Welcome to OUR LORE!');
+        });
+      } else {
+        showToast('Welcome to OUR LORE! (Muted mode)');
+      }
+      fireConfetti();
+    }
+
+    function showToast(message) {
+      const shelf = document.getElementById('toast-shelf');
+      if (!shelf) return;
+      const toast = document.createElement('div');
+      toast.className = 'toast-msg';
+      toast.innerHTML = `<i class="fa-solid fa-star" style="color: var(--pink)"></i> ${message}`;
+      shelf.appendChild(toast);
+      setTimeout(() => {
+        if (toast.parentNode) toast.parentNode.removeChild(toast);
+      }, 3300);
+    }
+
+    function fireConfetti() {
+      const canvas = document.getElementById('confetti-canvas');
+      const ctx = canvas.getContext('2d');
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+
+      const pieces = [];
+      const colors = ['#ff5e97', '#ccff00', '#7000ff', '#b18cfe', '#00f0ff'];
+
+      for (let i = 0; i < 90; i++) {
+        pieces.push({
+          x: canvas.width / 2,
+          y: canvas.height / 2,
+          vx: (Math.random() - 0.5) * 16,
+          vy: (Math.random() - 0.5) * 16 - 3,
+          size: Math.random() * 8 + 4,
+          color: colors[Math.floor(Math.random() * colors.length)],
+          rotation: Math.random() * 360,
+          vRot: (Math.random() - 0.5) * 8
+        });
+      }
+
+      let frames = 0;
+      function animateConfetti() {
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        pieces.forEach(p => {
+          p.x += p.vx;
+          p.y += p.vy;
+          p.vy += 0.35;
+          p.rotation += p.vRot;
+          ctx.save();
+          ctx.translate(p.x, p.y);
+          ctx.rotate((p.rotation * Math.PI) / 180);
+          ctx.fillStyle = p.color;
+          ctx.fillRect(-p.size / 2, -p.size / 2, p.size, p.size);
+          ctx.restore();
+        });
+
+        frames++;
+        if (frames < 120) {
+          requestAnimationFrame(animateConfetti);
+        } else {
+          ctx.clearRect(0, 0, canvas.width, canvas.height);
+        }
+      }
+      animateConfetti();
+    }
+
+    function setupEasterEggs() {
+      let typedBuffer = '';
+      window.addEventListener('keydown', (e) => {
+        typedBuffer += e.key.toLowerCase();
+        if (typedBuffer.length > 4) typedBuffer = typedBuffer.slice(-4);
+        if (typedBuffer === 'lore') {
+          fireConfetti();
+          showToast('🎉 Secret Word "LORE" Activated! You found an easter egg!');
+        }
+      });
+
+      let logoClicks = 0;
+      const logo = document.querySelector('.brand-logo');
+      if (logo) {
+        logo.addEventListener('click', () => {
+          logoClicks++;
+          if (logoClicks === 5) {
+            showToast('🌈 ULTRA BESTIE MODE UNLOCKED!');
+            fireConfetti();
+            document.body.style.animation = 'pulse 0.5s 3';
+            setTimeout(() => document.body.style.animation = '', 1500);
+            logoClicks = 0;
+          }
+        });
+      }
+    }
+  </script>
+</body>
+</html>
