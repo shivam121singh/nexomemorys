@@ -1819,6 +1819,76 @@ main#app-container {
   justify-content: center;
   font-weight: bold;
 }
+/* Fullscreen Lightbox Overlay */
+.fullscreen-lightbox-overlay {
+  display: none;
+  position: fixed;
+  inset: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(0, 0, 0, 0.95);
+  backdrop-filter: blur(10px);
+  z-index: 999999;
+  justify-content: center;
+  align-items: center;
+  padding: 1rem;
+  box-sizing: border-box;
+}
+
+.fullscreen-lightbox-overlay.active {
+  display: flex !important;
+}
+
+/* Small, subtle cross button on top-right */
+.lightbox-close-cross {
+  position: fixed;
+  top: 16px;
+  right: 18px;
+  width: 36px;
+  height: 36px;
+  background: rgba(255, 255, 255, 0.12);
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  border-radius: 50%;
+  color: #ffffff;
+  font-size: 24px;
+  line-height: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  z-index: 1000000;
+  transition: all 0.2s ease;
+}
+
+.lightbox-close-cross:hover {
+  background: rgba(255, 42, 133, 0.8);
+  transform: scale(1.1);
+}
+
+/* Inner wrapper for image/video */
+.lightbox-inner {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  max-width: 95vw;
+  max-height: 92vh;
+}
+
+.lightbox-media-center img,
+.lightbox-media-center video {
+  max-width: 92vw;
+  max-height: 78vh;
+  object-fit: contain;
+  border-radius: 10px;
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.8);
+}
+
+.lightbox-caption-box {
+  margin-top: 10px;
+  text-align: center;
+  max-width: 85vw;
+}
   </style>
 </head>
 <body>
@@ -1903,7 +1973,7 @@ main#app-container {
         </p>
         <div style="display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap;">
           <button class="btn-y2k btn-pink" onclick="switchSection('memories')">
-            <i class="fa-solid fa-camera"></i> Enter Our World
+            <i class="fa-solid fa-camera"></i> Enter To Gallery
           </button>
           <button class="btn-y2k btn-lime" onclick="openUploadModal()">
             <i class="fa-solid fa-plus"></i> Upload To Vault
@@ -2807,44 +2877,39 @@ const API_BASE_URL = window.location.hostname === 'localhost' || window.location
 
     // Full-screen Viewer (Lightbox)
     function openLightbox(index) {
-      currentLightboxIndex = index;
-      const mem = MEMORIES_DATA[index];
-      if (!mem) return;
+  currentLightboxIndex = index;
+  const mem = MEMORIES_DATA[index];
+  if (!mem) return;
 
-      const mediaWrapper = document.getElementById('lightbox-media-wrapper');
-      if (mediaWrapper) {
-        if (mem.mediaType === 'video') {
-          mediaWrapper.innerHTML = `<video controls autoplay playsinline src="${mem.image}" style="max-width: 95vw; max-height: 70vh; border-radius: 8px; object-fit: contain;"></video>`;
-        } else {
-          mediaWrapper.innerHTML = `<img id="lightbox-img" src="${mem.image}" alt="Enlarged view" style="max-width: 95vw; max-height: 70vh; border-radius: 8px; object-fit: contain;">`;
-        }
-      }
-
-      const titleEl = document.getElementById('lightbox-title');
-      const captionEl = document.getElementById('lightbox-caption');
-      const tagEl = document.getElementById('lightbox-tag');
-
-      if (titleEl) titleEl.textContent = mem.caption || mem.title || 'Squad Memory';
-      if (captionEl) captionEl.textContent = `${mem.location || '@Room 301'} • ${mem.date}`;
-      if (tagEl) tagEl.textContent = (mem.category || 'Lore').toUpperCase();
-
-      const lb = document.getElementById('lightbox');
-      if (lb) lb.classList.add('active');
+  const mediaWrapper = document.getElementById('lightbox-media-wrapper');
+  if (mediaWrapper) {
+    if (mem.mediaType === 'video') {
+      mediaWrapper.innerHTML = `<video controls autoplay playsinline src="${mem.image}" style="max-width: 92vw; max-height: 78vh; object-fit: contain; border-radius: 10px;"></video>`;
+    } else {
+      mediaWrapper.innerHTML = `<img src="${mem.image}" alt="Enlarged preview" style="max-width: 92vw; max-height: 78vh; object-fit: contain; border-radius: 10px;">`;
     }
+  }
 
-    function closeLightbox(e) {
-      if (!e || e.target.id === 'lightbox' || e.target.classList.contains('lightbox-close')) {
-        const video = document.querySelector('#lightbox-media-wrapper video');
-        if (video) video.pause();
-        const lb = document.getElementById('lightbox');
-        if (lb) lb.classList.remove('active');
-      }
-    }
+  const titleEl = document.getElementById('lightbox-title');
+  const captionEl = document.getElementById('lightbox-caption');
+  if (titleEl) titleEl.textContent = mem.caption || mem.title || '';
+  if (captionEl) captionEl.textContent = `${mem.location || '@Room 301'} • ${mem.date || ''}`;
 
-    function changeLightboxImage(direction) {
-      currentLightboxIndex = (currentLightboxIndex + direction + MEMORIES_DATA.length) % MEMORIES_DATA.length;
-      openLightbox(currentLightboxIndex);
-    }
+  const lb = document.getElementById('lightbox');
+  if (lb) lb.classList.add('active');
+  document.body.style.overflow = 'hidden'; // Prevents scrolling behind the image
+}
+
+function closeLightbox(e) {
+  const lb = document.getElementById('lightbox');
+  if (!lb) return;
+
+  const video = document.querySelector('#lightbox-media-wrapper video');
+  if (video) video.pause();
+
+  lb.classList.remove('active');
+  document.body.style.overflow = ''; // Restores scrolling
+}
 
     window.addEventListener('keydown', (e) => {
       const lb = document.getElementById('lightbox');
@@ -3212,14 +3277,22 @@ const API_BASE_URL = window.location.hostname === 'localhost' || window.location
     }
   </script>
   <!-- Fullscreen Lightbox Modal -->
-<div id="gallery-lightbox" class="gallery-lightbox-modal" onclick="closeLightbox(event)">
-  <button class="lightbox-close-btn" onclick="closeLightbox()">&times;</button>
-  <div class="lightbox-content-wrapper" id="lightbox-media-container" onclick="event.stopPropagation()">
-    <!-- Media inserted dynamically -->
-  </div>
-  <div class="lightbox-details" onclick="event.stopPropagation()">
-    <p id="lightbox-caption-text" class="lightbox-caption"></p>
-    <p id="lightbox-meta-text" class="lightbox-meta"></p>
+<!-- Fullscreen Lightbox with Top-Right Small Close Icon -->
+<div id="lightbox" class="fullscreen-lightbox-overlay" onclick="closeLightbox(event)">
+  <!-- Small top-right close cross -->
+  <button type="button" class="lightbox-close-cross" onclick="closeLightbox(event)" aria-label="Close">
+    &times;
+  </button>
+
+  <div class="lightbox-inner" onclick="event.stopPropagation()">
+    <div id="lightbox-media-wrapper" class="lightbox-media-center">
+      <!-- Image or Video gets rendered here -->
+    </div>
+    
+    <div class="lightbox-caption-box">
+      <div id="lightbox-title" style="font-weight: 700; font-size: 1.1rem; color: #fff;"></div>
+      <div id="lightbox-caption" style="font-size: 0.85rem; color: #aaa; margin-top: 4px;"></div>
+    </div>
   </div>
 </div>
 </body>
