@@ -8,7 +8,7 @@ const {
 } = require('../controllers/memoryController');
 
 router.get('/memories', getAllMemories);
-router.post('/upload', upload.single('mediaFile'), createMemory);
+router.post('/upload', upload.array('mediaFiles', 10), createMemory);
 router.post('/memories/:id/like', likeMemory);
 
 module.exports = router;

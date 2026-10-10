@@ -14,28 +14,41 @@ exports.getAllMemories = async (req, res) => {
 // POST /api/upload
 exports.createMemory = async (req, res) => {
   try {
-    const { uploader, caption, category, pin } = req.body;
+    const { caption, pin } = req.body;
 
     if (pin !== process.env.UPLOAD_SECRET_PIN) {
       return res.status(403).json({ error: 'Wrong Squad PIN! Vault access denied.' });
     }
 
-    if (!req.file) {
-      return res.status(400).json({ error: 'No media file provided.' });
+    // Support both multi-file (req.files) and single-file fallback (req.file)
+    const files = req.files || (req.file ? [req.file] : []);
+
+    if (!files || files.length === 0) {
+      return res.status(400).json({ error: 'No media files provided.' });
     }
 
-    const isVideo = req.file.mimetype.startsWith('video');
+    const savedMemories = [];
 
-    const newMemory = new Memory({
-      url: req.file.path,
-      mediaType: isVideo ? 'video' : 'image',
-      uploader: uploader || 'Squad Member',
-      caption: caption || 'Unlabeled lore.',
-      category: category || 'Memories'
+    for (const file of files) {
+      const isVideo = file.mimetype.startsWith('video');
+
+      const newMemory = new Memory({
+        url: file.path,
+        mediaType: isVideo ? 'video' : 'image',
+        uploader: 'Room 301 Squad',
+        caption: caption || 'Unlabeled lore.',
+        category: 'Memories'
+      });
+
+      const saved = await newMemory.save();
+      savedMemories.push(saved);
+    }
+
+    res.status(201).json({
+      success: true,
+      count: savedMemories.length,
+      data: savedMemories
     });
-
-    const saved = await newMemory.save();
-    res.status(201).json(saved);
   } catch (err) {
     console.error('Upload controller error:', err);
     res.status(500).json({ error: err.message || 'Server error while storing memory' });

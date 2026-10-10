@@ -2031,44 +2031,31 @@ main#app-container {
   <audio id="global-audio" preload="auto"></audio>
 
   <!-- Upload Lore Modal -->
-  <div class="upload-modal-overlay" id="upload-modal" onclick="closeUploadModal(event)">
-    <div class="upload-box" onclick="event.stopPropagation()">
-      <button class="lightbox-close" onclick="closeUploadModal()">&times;</button>
-      <span class="sticker-badge" style="margin-bottom: 0.8rem;">PERMANENT VAULT</span>
-      <h3 style="font-family: var(--font-display); font-size: 1.8rem; margin-bottom: 1rem;">DROP PHOTO / VIDEO</h3>
-      <form id="lore-upload-form" onsubmit="handleMediaUpload(event)">
-        <div class="form-group">
-          <label>Select Photo or Video (Max 50MB)</label>
-          <input type="file" id="media-file-input" class="form-control" accept="image/*,video/*" required>
-        </div>
-        <div class="form-group">
-          <label>Your Name / Nickname</label>
-          <input type="text" id="uploader-input" class="form-control" placeholder="e.g. Shivam" required>
-        </div>
-        <div class="form-group">
-          <label>Caption / Memory Note</label>
-          <input type="text" id="caption-input" class="form-control" placeholder="What happened here?" required>
-        </div>
-        <div class="form-group">
-          <label>Category</label>
-          <select id="category-input" class="form-control">
-            <option value="college">Campus Days</option>
-            <option value="trips">Roadtrips</option>
-            <option value="chaos">Pure Chaos</option>
-            <option value="golden">Golden Hours</option>
-          </select>
-        </div>
-        <div class="form-group">
-          <label>Squad Passcode PIN</label>
-          <input type="password" id="pin-input" class="form-control" placeholder="Enter squad PIN" required>
-        </div>
-        <button type="submit" id="upload-submit-btn" class="btn-y2k btn-pink" style="width: 100%; margin-top: 0.5rem;">
-          <i class="fa-solid fa-cloud-arrow-up"></i> Save Permanently 
-        </button>
-        <p id="upload-status" style="font-weight: 700; margin-top: 0.8rem; text-align: center; font-size: 0.85rem; color: var(--pink);"></p>
-      </form>
-    </div>
+ <div class="upload-modal-overlay" id="upload-modal" onclick="closeUploadModal(event)">
+  <div class="upload-box" onclick="event.stopPropagation()">
+    <button class="lightbox-close" onclick="closeUploadModal()">&times;</button>
+    <span class="sticker-badge" style="margin-bottom: 0.8rem;">PERMANENT VAULT</span>
+    <h3 style="font-family: var(--font-display); font-size: 1.8rem; margin-bottom: 1rem;">DROP PHOTO / VIDEO</h3>
+    <form id="lore-upload-form" onsubmit="handleMediaUpload(event)">
+      <div class="form-group">
+        <label>Select Photos or Videos (Max 50MB)</label>
+        <input type="file" id="media-file-input" class="form-control" accept="image/*,video/*" multiple required>
+      </div>
+      <div class="form-group">
+        <label>Caption / Memory Note</label>
+        <input type="text" id="caption-input" class="form-control" placeholder="What happened here?" required>
+      </div>
+      <div class="form-group">
+        <label>Squad Passcode PIN</label>
+        <input type="password" id="pin-input" class="form-control" placeholder="Enter squad PIN" required>
+      </div>
+      <button type="submit" id="upload-submit-btn" class="btn-y2k btn-pink" style="width: 100%; margin-top: 0.5rem;">
+        <i class="fa-solid fa-cloud-arrow-up"></i> Save Permanently 
+      </button>
+      <p id="upload-status" style="font-weight: 700; margin-top: 0.8rem; text-align: center; font-size: 0.85rem; color: var(--pink);"></p>
+    </form>
   </div>
+</div>
 
   <!-- Image/Video Lightbox Modal -->
   <div class="lightbox-overlay" id="lightbox" onclick="closeLightbox(event)">
@@ -2395,57 +2382,53 @@ const API_BASE_URL = window.location.hostname === 'localhost' || window.location
         document.getElementById('upload-status').innerText = '';
       }
     }
+async function handleMediaUpload(event) {
+  event.preventDefault();
 
-    async function handleMediaUpload(e) {
-      e.preventDefault();
-      const fileInput = document.getElementById('media-file-input');
-      const uploader = document.getElementById('uploader-input').value.trim();
-      const caption = document.getElementById('caption-input').value.trim();
-      const category = document.getElementById('category-input').value;
-      const pin = document.getElementById('pin-input').value.trim();
-      const statusEl = document.getElementById('upload-status');
-      const submitBtn = document.getElementById('upload-submit-btn');
+  const fileInput = document.getElementById('media-file-input');
+  const captionInput = document.getElementById('caption-input');
+  const pinInput = document.getElementById('pin-input');
+  const statusEl = document.getElementById('upload-status');
+  const submitBtn = document.getElementById('upload-submit-btn');
 
-      if (!fileInput.files[0]) {
-        statusEl.innerText = 'Please select a photo or video!';
-        return;
-      }
+  if (!fileInput.files.length) {
+    statusEl.textContent = 'Please choose at least one photo or video.';
+    return;
+  }
 
-      const formData = new FormData();
-      formData.append('mediaFile', fileInput.files[0]);
-      formData.append('uploader', uploader);
-      formData.append('caption', caption);
-      formData.append('category', category);
-      formData.append('pin', pin);
+  const formData = new FormData();
+  for (let i = 0; i < fileInput.files.length; i++) {
+    formData.append('mediaFiles', fileInput.files[i]);
+  }
+  formData.append('caption', captionInput.value);
+  formData.append('pin', pinInput.value);
 
-      submitBtn.disabled = true;
-      statusEl.innerText = 'Uploading to Cloudinary & saving in MongoDB... ⏳';
+  try {
+    submitBtn.disabled = true;
+    statusEl.style.color = 'var(--accent, #a3e635)';
+    statusEl.textContent = `Uploading ${fileInput.files.length} file(s)...`;
 
-      try {
-        const res = await fetch(`${API_BASE_URL}/upload`, {
-          method: 'POST',
-          body: formData
-        });
-        const data = await res.json();
+    const res = await fetch(`${API_BASE_URL}/upload`, {
+      method: 'POST',
+      body: formData
+    });
 
-        if (!res.ok) throw new Error(data.error || 'Upload failed');
-
-        statusEl.innerText = 'Saved to vault forever! ✨';
-        fireConfetti();
-
-        setTimeout(() => {
-          closeUploadModal();
-          document.getElementById('lore-upload-form').reset();
-          submitBtn.disabled = false;
-          syncLiveMemories();
-        }, 1200);
-
-      } catch (err) {
-        statusEl.innerText = `Error: ${err.message}`;
-        submitBtn.disabled = false;
-      }
+    const data = await res.json();
+    if (!res.ok) {
+      throw new Error(data.error || 'Failed to upload memories.');
     }
 
+    statusEl.textContent = 'Uploaded successfully!';
+    setTimeout(() => {
+      window.location.reload();
+    }, 1200);
+  } catch (err) {
+    statusEl.style.color = 'var(--pink, #ff2a85)';
+    statusEl.textContent = err.message || 'Network error.';
+  } finally {
+    submitBtn.disabled = false;
+  }
+}
     function initCursor() {
       const cursor = document.getElementById('custom-cursor');
       const dot = document.getElementById('cursor-dot');
