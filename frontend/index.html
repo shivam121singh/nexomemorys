@@ -2250,23 +2250,36 @@ main#app-container {
 </div>
 
   <!-- Image/Video Lightbox Modal -->
-  <div class="lightbox-overlay" id="lightbox" onclick="closeLightbox(event)">
-    <div class="lightbox-card" onclick="event.stopPropagation()">
-      <button class="lightbox-close" onclick="closeLightbox()">&times;</button>
-      <button class="lightbox-nav-btn lightbox-prev" onclick="changeLightboxImage(-1)">‹</button>
-      <button class="lightbox-nav-btn lightbox-next" onclick="changeLightboxImage(1)">›</button>
-      <div id="lightbox-media-wrapper">
-        <img id="lightbox-img" src="" alt="Enlarged view">
+ <div id="lightbox" class="lightbox-overlay" onclick="closeLightbox(event)">
+  <div class="lightbox-card" onclick="event.stopPropagation()">
+    <!-- Close Cross -->
+    <button type="button" class="lightbox-close" onclick="closeLightbox(event)" aria-label="Close">&times;</button>
+    
+    <!-- Previous Button -->
+    <button type="button" class="lightbox-nav-btn lightbox-prev" onclick="changeLightboxImage(-1, event)" aria-label="Previous" style="z-index: 1000000; position: absolute; pointer-events: auto;">
+      <i class="fa-solid fa-chevron-left" style="pointer-events: none;"></i>
+    </button>
+    
+    <!-- Next Button -->
+    <button type="button" class="lightbox-nav-btn lightbox-next" onclick="changeLightboxImage(1, event)" aria-label="Next" style="z-index: 1000000; position: absolute; pointer-events: auto;">
+      <i class="fa-solid fa-chevron-right" style="pointer-events: none;"></i>
+    </button>
+
+    <!-- Media Area -->
+    <div id="lightbox-media-wrapper">
+      <img id="lightbox-img" src="" alt="Memory">
+    </div>
+
+    <!-- Info & Badge -->
+    <div class="lightbox-info">
+      <div>
+        <h3 id="lightbox-title" style="font-family: var(--font-display); font-size: 1.4rem; margin-bottom: 0.2rem;"></h3>
+        <p id="lightbox-caption" style="font-size: 0.85rem; color: var(--text-muted);"></p>
       </div>
-      <div class="lightbox-info">
-        <div>
-          <h4 id="lightbox-title" style="font-family: var(--font-display); font-size: 1.2rem;">Memory Title</h4>
-          <p id="lightbox-caption" style="color: var(--text-muted); font-size: 0.9rem; margin-top: 0.2rem;">Location • Date</p>
-        </div>
-        <span class="sticker-badge" id="lightbox-tag">POLAROID</span>
-      </div>
+      <span id="lightbox-tag" class="sticker-badge" style="transform: rotate(2deg); font-size: 0.85rem;">POLAROID</span>
     </div>
   </div>
+</div>
 
   <!-- Letter Open Modal -->
   <div class="letter-modal" id="letter-modal" onclick="closeLetterModal(event)">
@@ -2877,30 +2890,38 @@ const API_BASE_URL = window.location.hostname === 'localhost' || window.location
 
     // Full-screen Viewer (Lightbox)
     function openLightbox(index) {
-  currentLightboxIndex = index;
-  const mem = MEMORIES_DATA[index];
+  if (!MEMORIES_DATA || MEMORIES_DATA.length === 0) return;
+
+  // Wrap around index to stay within bounds
+  currentLightboxIndex = (index + MEMORIES_DATA.length) % MEMORIES_DATA.length;
+  const mem = MEMORIES_DATA[currentLightboxIndex];
   if (!mem) return;
 
   const mediaWrapper = document.getElementById('lightbox-media-wrapper');
   if (mediaWrapper) {
-    if (mem.mediaType === 'video') {
+    const isVideo = mem.mediaType === 'video' || (mem.image && mem.image.match(/\.(mp4|webm|mov)$/i));
+    if (isVideo) {
       mediaWrapper.innerHTML = `<video controls autoplay playsinline src="${mem.image}" style="max-width: 92vw; max-height: 78vh; object-fit: contain; border-radius: 10px;"></video>`;
     } else {
-      mediaWrapper.innerHTML = `<img src="${mem.image}" alt="Enlarged preview" style="max-width: 92vw; max-height: 78vh; object-fit: contain; border-radius: 10px;">`;
+      mediaWrapper.innerHTML = `<img src="${mem.image}" alt="${mem.title || 'Enlarged preview'}" style="max-width: 92vw; max-height: 78vh; object-fit: contain; border-radius: 10px;">`;
     }
   }
 
   const titleEl = document.getElementById('lightbox-title');
   const captionEl = document.getElementById('lightbox-caption');
+  const tagEl = document.getElementById('lightbox-tag');
+
   if (titleEl) titleEl.textContent = mem.caption || mem.title || '';
-  if (captionEl) captionEl.textContent = `${mem.location || '@Room 301'} • ${mem.date || ''}`;
+  if (captionEl) captionEl.textContent = `${mem.location || '@Room 301 Squad'} • ${mem.date || ''}`;
+  if (tagEl) tagEl.textContent = (mem.category || 'POLAROID').toUpperCase();
 
   const lb = document.getElementById('lightbox');
   if (lb) lb.classList.add('active');
-  document.body.style.overflow = 'hidden'; // Prevents scrolling behind the image
+  document.body.style.overflow = 'hidden';
 }
 
 function closeLightbox(e) {
+  if (e && e.stopPropagation) e.stopPropagation();
   const lb = document.getElementById('lightbox');
   if (!lb) return;
 
@@ -2908,7 +2929,17 @@ function closeLightbox(e) {
   if (video) video.pause();
 
   lb.classList.remove('active');
-  document.body.style.overflow = ''; // Restores scrolling
+  document.body.style.overflow = '';
+}
+
+function changeLightboxImage(direction, e) {
+  if (e && e.stopPropagation) {
+    e.stopPropagation(); // Prevents clicks on arrows from bubbling up and closing the modal
+  }
+  if (!MEMORIES_DATA || MEMORIES_DATA.length === 0) return;
+
+  currentLightboxIndex = (currentLightboxIndex + direction + MEMORIES_DATA.length) % MEMORIES_DATA.length;
+  openLightbox(currentLightboxIndex);
 }
 
     window.addEventListener('keydown', (e) => {
