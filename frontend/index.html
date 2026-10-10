@@ -1697,6 +1697,128 @@ main#app-container {
     max-width: 100%;
   }
 }
+/* //gallery */
+/* Gallery Grid Layout */
+.memory-gallery-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr); /* 3 photos per row on mobile */
+  gap: 6px;
+  padding: 10px;
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+@media (min-width: 768px) {
+  .memory-gallery-grid {
+    grid-template-columns: repeat(4, 1fr); /* 4 photos per row on laptops */
+    gap: 10px;
+  }
+}
+
+/* Individual Thumbnail Tile */
+.gallery-thumb-card {
+  position: relative;
+  aspect-ratio: 1 / 1; /* Perfect square crop */
+  border-radius: 8px;
+  overflow: hidden;
+  cursor: pointer;
+  background: #111;
+  border: 2px solid #222;
+  transition: transform 0.15s ease, border-color 0.15s ease;
+}
+
+.gallery-thumb-card:active {
+  transform: scale(0.96);
+}
+
+.gallery-thumb-card img,
+.gallery-thumb-card video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.video-badge-icon {
+  position: absolute;
+  top: 6px;
+  right: 6px;
+  background: rgba(0, 0, 0, 0.65);
+  color: #fff;
+  font-size: 0.7rem;
+  padding: 3px 6px;
+  border-radius: 4px;
+}
+
+/* Fullscreen Gallery Lightbox */
+.gallery-lightbox-modal {
+  display: none;
+  position: fixed;
+  inset: 0;
+  z-index: 99999;
+  background: rgba(0, 0, 0, 0.94);
+  backdrop-filter: blur(8px);
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  padding: 15px;
+}
+
+.gallery-lightbox-modal.active {
+  display: flex;
+}
+
+.lightbox-content-wrapper {
+  max-width: 95vw;
+  max-height: 80vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.lightbox-content-wrapper img,
+.lightbox-content-wrapper video {
+  max-width: 100%;
+  max-height: 75vh;
+  border-radius: 12px;
+  object-fit: contain;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.8);
+}
+
+.lightbox-details {
+  color: #fff;
+  text-align: center;
+  margin-top: 14px;
+}
+
+.lightbox-caption {
+  font-size: 1.1rem;
+  font-weight: 600;
+  margin-bottom: 4px;
+}
+
+.lightbox-meta {
+  font-size: 0.85rem;
+  color: #a3a3a3;
+}
+
+.lightbox-close-btn {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  background: #ff2a85;
+  color: white;
+  border: none;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  font-size: 1.4rem;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: bold;
+}
   </style>
 </head>
 <body>
@@ -2108,9 +2230,10 @@ main#app-container {
 
   <script>
 const API_BASE_URL = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1'
-  ? 'http://localhost:5000/api'
-  : 'https://nexomemorys.onrender.com/api';
-      const FRIENDSHIP_START_DATE = new Date('2024-08-15T00:00:00');
+      ? 'http://localhost:5000/api'
+      : 'https://nexomemorys.onrender.com/api';
+
+    const FRIENDSHIP_START_DATE = new Date('2024-08-15T00:00:00');
 
     // Squad Friends Data
     const FRIENDS_DATA = [
@@ -2124,7 +2247,7 @@ const API_BASE_URL = window.location.hostname === 'localhost' || window.location
         favoriteQuote: '“Trust the process, push to main, and grab chai.”',
         favoriteSong: 'Vienna — Billy Joel',
         iconicMemory: 'Built this entire memory vault so the squad never forgets a single moment.',
-        image: 'assets/friends/shivam.jpeg' ,
+        image: 'assets/friends/shivam.jpeg'
       },
       {
         id: 'friend-2',
@@ -2136,7 +2259,7 @@ const API_BASE_URL = window.location.hostname === 'localhost' || window.location
         favoriteQuote: '“Bhai Campa Le Lete Hai😈.”',
         favoriteSong: 'Supercut — Lorde',
         iconicMemory: 'Got lost on a 15-minute chai run and returned with 4 whole pizzas.',
-        image: 'assets/friends/satyam.jpeg' ,
+        image: 'assets/friends/satyam.jpeg'
       },
       {
         id: 'friend-3',
@@ -2148,7 +2271,7 @@ const API_BASE_URL = window.location.hostname === 'localhost' || window.location
         favoriteQuote: '“Tu bas order kar, main pakka UPI kar doonga.”',
         favoriteSong: 'Cruel Summer — Taylor Swift',
         iconicMemory: 'Cooked Maggi at 4 AM for the entire room right before semester exams.',
-        image: 'assets/friends/krish.jpeg' ,
+        image: 'assets/friends/krish.jpeg'
       },
       {
         id: 'friend-4',
@@ -2160,7 +2283,7 @@ const API_BASE_URL = window.location.hostname === 'localhost' || window.location
         favoriteQuote: '“Bhai Yo Ladki Dekh 🫦 ”',
         favoriteSong: 'Tongue Tied — GROUPLOVE',
         iconicMemory: 'Played the exact perfect beat drop as the sunrise broke over the hostel roof.',
-        image: 'assets/friends/aryan.jpeg' ,
+        image: 'assets/friends/aryan.jpeg'
       }
     ];
 
@@ -2171,17 +2294,17 @@ const API_BASE_URL = window.location.hostname === 'localhost' || window.location
         title: 'Golden Hour Rooftop',
         category: 'golden',
         date: 'Sept 2024',
-        location: 'Hostel Roof',
+        location: '@Room 301 Squad',
         caption: 'When we promised to always celebrate the small wins.',
-        image: 'https://images.unsplash.com/photo-1529156069898-49953e39b3ac?auto=format&fit=crop&w=800&q=80',
-        image: 'assets/friends/satyam.jpeg' ,
+        image: 'assets/friends/satyam.jpeg',
+        mediaType: 'image'
       },
       {
         id: 'seed-2',
         title: 'Spontaneous Highway Dhaba',
         category: 'trips',
         date: 'Nov 2024',
-        location: 'Highway Route 9',
+        location: '@Room 301 Squad',
         caption: 'Hot parathas at 3:30 AM with cold winter air.',
         image: 'https://images.unsplash.com/photo-1506869640319-fe1a24fd76dc?auto=format&fit=crop&w=800&q=80',
         mediaType: 'image'
@@ -2191,7 +2314,7 @@ const API_BASE_URL = window.location.hostname === 'localhost' || window.location
         title: 'Exam Season Chaos',
         category: 'college',
         date: 'Dec 2024',
-        location: 'Room 304',
+        location: '@Room 301 Squad',
         caption: 'Studying for finals quickly degraded into making paper airplanes.',
         image: 'https://images.unsplash.com/photo-1523240795612-9a054b0db644?auto=format&fit=crop&w=800&q=80',
         mediaType: 'image'
@@ -2201,7 +2324,7 @@ const API_BASE_URL = window.location.hostname === 'localhost' || window.location
         title: 'The Great Pancake Catastrophe',
         category: 'chaos',
         date: 'Feb 2025',
-        location: 'Hostel Kitchen',
+        location: '@Room 301 Squad',
         caption: 'Flour on the fan. Nobody knows how it got up there.',
         image: 'https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?auto=format&fit=crop&w=800&q=80',
         mediaType: 'image'
@@ -2212,8 +2335,8 @@ const API_BASE_URL = window.location.hostname === 'localhost' || window.location
       {
         date: 'August 2024',
         title: 'Day Zero: The First Meet',
-        story: 'Four strangers walked into Room 304. Within 48 hours, it was complete and permanent chaos.',
-        image: 'assets/timeline/event2.jpeg' ,
+        story: 'Four strangers walked into Room 301. Within 48 hours, it was complete and permanent chaos.',
+        image: 'assets/timeline/event2.jpeg'
       },
       {
         date: 'November 2024',
@@ -2225,7 +2348,7 @@ const API_BASE_URL = window.location.hostname === 'localhost' || window.location
         date: 'March 2025',
         title: 'The Spontaneous Trip',
         story: 'Packed bags in 15 minutes, caught the train, and lived like kings on a student budget.',
-        image: 'assets/timeline/event4.jpeg' ,
+        image: 'assets/timeline/event4.jpeg'
       },
       {
         date: 'Present Day',
@@ -2271,11 +2394,11 @@ const API_BASE_URL = window.location.hostname === 'localhost' || window.location
       {
         title: 'Open When You Miss The Boys',
         snippet: 'For when distance or busy semester schedules feel a little too quiet.',
-        content: `Dear friend,\n\nLife gets busy and schedules are messy, but space means nothing when our lore runs this deep.\n\nClose your eyes and remember: the time we sang out of tune on the highway, the uncontrollable laughing fits at 3 AM over nothing, and how we can look across a crowded room and immediately know what each other is thinking.\n\nWe are only a single text away. Drop a stupid meme in the group chat right now.\n\nAlways here.`
+        content: `Dear friend,\n\nLife gets busy and schedules are messy, but space means nothing when our lore runs this deep.\n\nClose your eyes and remember: the time we sang out of tune on the highway, the uncontrollable laughing fits at 3 AM over nothing, and how we can look across a room and immediately know what each other is thinking.\n\nWe are only a single text away. Drop a stupid meme in the group chat right now.\n\nAlways here.`
       },
       {
         title: 'Open When You Need Instant Serotonin',
-        snippet: 'Guaranteed laughter straight from our Room 304 archives.',
+        snippet: 'Guaranteed laughter straight from our Room 301 archives.',
         content: `Emergency serotonin protocol activated:\n\n1. Remember Satyam swearing he was '2 minutes away' while fast asleep in bed?\n2. Remember Krish cooking Maggi with a hair dryer when the induction stopped working?\n3. You are brilliant, resilient, and deeply unserious.\n\nNow smile and go drink a glass of water!`
       },
       {
@@ -2284,8 +2407,7 @@ const API_BASE_URL = window.location.hostname === 'localhost' || window.location
         content: `Deep breath.\n\nNo test score, no corporate email, no job interview defines your human worth. In five years, nobody is going to ask what happened on this random Tuesday.\n\nWork hard because you care about your dreams, but never sacrifice your peace for things that don't love you back. We believe in you more than you currently believe in yourself.\n\nGo take a walk. We've got your back always.`
       }
     ];
-// 5 Handpicked Friendship Anthems (3 Hindi + 2 English)
-   // 5 Handpicked Friendship Anthems (3 Hindi + 2 English)
+
     const PLAYLIST = [
       {
         title: 'Yaaron (Dosti)',
@@ -2318,6 +2440,7 @@ const API_BASE_URL = window.location.hostname === 'localhost' || window.location
         art: 'https://images.unsplash.com/photo-1511632765486-a01980e01a18?auto=format&fit=crop&w=150&q=80'
       }
     ];
+
     let currentTrackIndex = 0;
     let isPlaying = false;
     let currentLightboxIndex = 0;
@@ -2337,7 +2460,7 @@ const API_BASE_URL = window.location.hostname === 'localhost' || window.location
       setupEasterEggs();
       setupAudioListeners();
       applySavedTheme();
-      syncLiveMemories(); // Connects to MongoDB Atlas backend
+      syncLiveMemories();
     });
 
     // 1. Live MongoDB & Cloudinary Sync
@@ -2346,18 +2469,18 @@ const API_BASE_URL = window.location.hostname === 'localhost' || window.location
         const res = await fetch(`${API_BASE_URL}/memories`);
         if (res.ok) {
           const cloudMemories = await res.json();
-          if (cloudMemories && cloudMemories.length > 0) {
-            const mapped = cloudMemories.map(m => ({
+          const items = Array.isArray(cloudMemories) ? cloudMemories : (cloudMemories.data || []);
+          if (items.length > 0) {
+            const mapped = items.map(m => ({
               id: m._id,
               title: m.caption || 'Live Lore Snap',
               category: m.category || 'chaos',
-              date: new Date(m.createdAt).toLocaleDateString('en-US', { month: 'short', year: 'numeric' }),
-              location: `@${m.uploader || 'Squad'}`,
+              date: m.createdAt ? new Date(m.createdAt).toLocaleDateString('en-US', { month: 'short', year: 'numeric' }) : 'Recent',
+              location: `@${m.uploader || 'Room 301 Squad'}`,
               caption: m.caption || '',
               image: m.url,
-              mediaType: m.mediaType || 'image'
+              mediaType: m.mediaType || (m.url && m.url.match(/\.(mp4|webm|mov)$/i) ? 'video' : 'image')
             }));
-            // Merge cloud memories with default memories
             MEMORIES_DATA = [...mapped, ...MEMORIES_DATA];
           }
         }
@@ -2382,53 +2505,55 @@ const API_BASE_URL = window.location.hostname === 'localhost' || window.location
         document.getElementById('upload-status').innerText = '';
       }
     }
-async function handleMediaUpload(event) {
-  event.preventDefault();
 
-  const fileInput = document.getElementById('media-file-input');
-  const captionInput = document.getElementById('caption-input');
-  const pinInput = document.getElementById('pin-input');
-  const statusEl = document.getElementById('upload-status');
-  const submitBtn = document.getElementById('upload-submit-btn');
+    async function handleMediaUpload(event) {
+      event.preventDefault();
 
-  if (!fileInput.files.length) {
-    statusEl.textContent = 'Please choose at least one photo or video.';
-    return;
-  }
+      const fileInput = document.getElementById('media-file-input');
+      const captionInput = document.getElementById('caption-input');
+      const pinInput = document.getElementById('pin-input');
+      const statusEl = document.getElementById('upload-status');
+      const submitBtn = document.getElementById('upload-submit-btn');
 
-  const formData = new FormData();
-  for (let i = 0; i < fileInput.files.length; i++) {
-    formData.append('mediaFiles', fileInput.files[i]);
-  }
-  formData.append('caption', captionInput.value);
-  formData.append('pin', pinInput.value);
+      if (!fileInput.files.length) {
+        statusEl.textContent = 'Please choose at least one photo or video.';
+        return;
+      }
 
-  try {
-    submitBtn.disabled = true;
-    statusEl.style.color = 'var(--accent, #a3e635)';
-    statusEl.textContent = `Uploading ${fileInput.files.length} file(s)...`;
+      const formData = new FormData();
+      for (let i = 0; i < fileInput.files.length; i++) {
+        formData.append('mediaFiles', fileInput.files[i]);
+      }
+      formData.append('caption', captionInput.value);
+      formData.append('pin', pinInput.value);
 
-    const res = await fetch(`${API_BASE_URL}/upload`, {
-      method: 'POST',
-      body: formData
-    });
+      try {
+        submitBtn.disabled = true;
+        statusEl.style.color = 'var(--accent, #a3e635)';
+        statusEl.textContent = `Uploading ${fileInput.files.length} file(s)...`;
 
-    const data = await res.json();
-    if (!res.ok) {
-      throw new Error(data.error || 'Failed to upload memories.');
+        const res = await fetch(`${API_BASE_URL}/upload`, {
+          method: 'POST',
+          body: formData
+        });
+
+        const data = await res.json();
+        if (!res.ok) {
+          throw new Error(data.error || 'Failed to upload memories.');
+        }
+
+        statusEl.textContent = 'Uploaded successfully!';
+        setTimeout(() => {
+          window.location.reload();
+        }, 1200);
+      } catch (err) {
+        statusEl.style.color = 'var(--pink, #ff2a85)';
+        statusEl.textContent = err.message || 'Network error.';
+      } finally {
+        submitBtn.disabled = false;
+      }
     }
 
-    statusEl.textContent = 'Uploaded successfully!';
-    setTimeout(() => {
-      window.location.reload();
-    }, 1200);
-  } catch (err) {
-    statusEl.style.color = 'var(--pink, #ff2a85)';
-    statusEl.textContent = err.message || 'Network error.';
-  } finally {
-    submitBtn.disabled = false;
-  }
-}
     function initCursor() {
       const cursor = document.getElementById('custom-cursor');
       const dot = document.getElementById('cursor-dot');
@@ -2443,7 +2568,7 @@ async function handleMediaUpload(event) {
         }, { duration: 250, fill: "forwards" });
       });
 
-      const interactiveElements = document.querySelectorAll('button, a, .friend-card, .polaroid-card, .envelope-card, input, textarea, select');
+      const interactiveElements = document.querySelectorAll('button, a, .friend-card, .polaroid-card, .envelope-card, .gallery-thumb-card, input, textarea, select');
       interactiveElements.forEach(el => {
         el.addEventListener('mouseenter', () => cursor.classList.add('cursor-hover'));
         el.addEventListener('mouseleave', () => cursor.classList.remove('cursor-hover'));
@@ -2511,10 +2636,15 @@ async function handleMediaUpload(event) {
         const minutes = Math.floor((totalSecs % 3600) / 60);
         const seconds = totalSecs % 60;
 
-        document.getElementById('cnt-days').textContent = String(days).padStart(3, '0');
-        document.getElementById('cnt-hours').textContent = String(hours).padStart(2, '0');
-        document.getElementById('cnt-minutes').textContent = String(minutes).padStart(2, '0');
-        document.getElementById('cnt-seconds').textContent = String(seconds).padStart(2, '0');
+        const dEl = document.getElementById('cnt-days');
+        const hEl = document.getElementById('cnt-hours');
+        const mEl = document.getElementById('cnt-minutes');
+        const sEl = document.getElementById('cnt-seconds');
+
+        if (dEl) dEl.textContent = String(days).padStart(3, '0');
+        if (hEl) hEl.textContent = String(hours).padStart(2, '0');
+        if (mEl) mEl.textContent = String(minutes).padStart(2, '0');
+        if (sEl) sEl.textContent = String(seconds).padStart(2, '0');
       }
       updateTimer();
       setInterval(updateTimer, 1000);
@@ -2563,60 +2693,70 @@ async function handleMediaUpload(event) {
         document.getElementById('friend-detail-modal').classList.remove('active');
       }
     }
-function renderFilmstrip() {
-  const strip = document.getElementById('filmstrip-row');
-  if (!strip) return;
 
-  const items = MEMORIES_DATA.length ? MEMORIES_DATA : [];
-  if (!items.length) return;
+    function renderFilmstrip() {
+      const strip = document.getElementById('filmstrip-row');
+      if (!strip) return;
 
-  // Duplicate items array to make the seamless infinite scroll loop
-  const loopList = [...items, ...items];
+      const items = MEMORIES_DATA.length ? MEMORIES_DATA : [];
+      if (!items.length) return;
 
-  strip.innerHTML = `
-    <div class="filmstrip-track">
-      ${loopList.map((mem, idx) => {
-        const originalIndex = idx % items.length;
-        const mediaHtml = mem.mediaType === 'video'
-          ? `<video src="${mem.image}" muted preload="metadata"></video>`
-          : `<img src="${mem.image}" alt="${mem.title}" loading="lazy">`;
+      const loopList = [...items, ...items];
 
-        return `
-          <div class="filmstrip-cell" onclick="openLightbox(${originalIndex})">
-            <div class="filmstrip-sprockets">
-              <div class="sprocket-hole"></div><div class="sprocket-hole"></div>
-              <div class="sprocket-hole"></div><div class="sprocket-hole"></div>
-            </div>
-            ${mediaHtml}
-            <div style="color: #fff; font-family: var(--font-mono); font-size: 0.75rem; margin-top: 6px; text-align: center;">
-              FRAME #${originalIndex + 1}
-            </div>
-          </div>
-        `;
-      }).join('')}
-    </div>
-  `;
-}
+      strip.innerHTML = `
+        <div class="filmstrip-track">
+          ${loopList.map((mem, idx) => {
+            const originalIndex = idx % items.length;
+            const mediaHtml = mem.mediaType === 'video'
+              ? `<video src="${mem.image}" muted preload="metadata"></video>`
+              : `<img src="${mem.image}" alt="${mem.title}" loading="lazy">`;
 
+            return `
+              <div class="filmstrip-cell" onclick="openLightbox(${originalIndex})">
+                <div class="filmstrip-sprockets">
+                  <div class="sprocket-hole"></div><div class="sprocket-hole"></div>
+                  <div class="sprocket-hole"></div><div class="sprocket-hole"></div>
+                </div>
+                ${mediaHtml}
+                <div style="color: #fff; font-family: var(--font-mono); font-size: 0.75rem; margin-top: 6px; text-align: center;">
+                  FRAME #${originalIndex + 1}
+                </div>
+              </div>
+            `;
+          }).join('')}
+        </div>
+      `;
+    }
+
+    // Modern 3-Column Square Thumbnail Gallery Grid
     function renderGallery() {
       const container = document.getElementById('gallery-masonry-container');
       if (!container) return;
 
+      // Apply the grid styles to ensure square tiles regardless of CSS classes
+      container.style.display = 'grid';
+      container.style.gridTemplateColumns = 'repeat(3, 1fr)';
+      container.style.gap = '8px';
+      container.style.padding = '10px 0';
+
       const filtered = MEMORIES_DATA.filter(m => activeCategory === 'all' || m.category === activeCategory);
+
+      if (filtered.length === 0) {
+        container.innerHTML = '<div style="grid-column: 1/-1; text-align: center; color: var(--text-muted); padding: 2rem;">No memories found in this category.</div>';
+        return;
+      }
+
       container.innerHTML = filtered.map((item) => {
         const globalIdx = MEMORIES_DATA.findIndex(x => x.id === item.id);
-        const mediaTag = item.mediaType === 'video'
-          ? `<video src="${item.image}" muted preload="metadata" style="pointer-events:none;"></video>`
-          : `<img src="${item.image}" alt="${item.title}" loading="lazy">`;
+        const isVideo = item.mediaType === 'video';
 
         return `
-          <div class="gallery-item polaroid-card" onclick="openLightbox(${globalIdx})">
-            <div class="tape tape-top-center"></div>
-            ${mediaTag}
-            <div class="polaroid-caption">${item.title}</div>
-            <div style="font-size: 0.8rem; text-align: center; color: var(--text-muted); margin-top: 4px;">
-              ${item.location} • ${item.date}
-            </div>
+          <div class="gallery-thumb-card" onclick="openLightbox(${globalIdx})" style="position: relative; aspect-ratio: 1 / 1; border-radius: 8px; overflow: hidden; background: #111; cursor: pointer; border: 2px solid var(--border-color, #222);">
+            ${isVideo
+              ? `<video src="${item.image}" muted preload="metadata" style="width: 100%; height: 100%; object-fit: cover; pointer-events: none;"></video>
+                 <span style="position: absolute; top: 6px; right: 6px; background: rgba(0,0,0,0.65); color: #fff; font-size: 0.65rem; padding: 2px 5px; border-radius: 4px;"><i class="fa-solid fa-play"></i></span>`
+              : `<img src="${item.image}" alt="${item.title}" loading="lazy" style="width: 100%; height: 100%; object-fit: cover; display: block;">`
+            }
           </div>
         `;
       }).join('');
@@ -2632,53 +2772,72 @@ function renderFilmstrip() {
     function handleGallerySearch() {
       const query = document.getElementById('gallery-search').value.toLowerCase();
       const container = document.getElementById('gallery-masonry-container');
+      if (!container) return;
+
+      container.style.display = 'grid';
+      container.style.gridTemplateColumns = 'repeat(3, 1fr)';
+      container.style.gap = '8px';
+
       const filtered = MEMORIES_DATA.filter(m => 
-        m.title.toLowerCase().includes(query) || 
-        m.caption.toLowerCase().includes(query) || 
-        m.location.toLowerCase().includes(query)
+        (m.title && m.title.toLowerCase().includes(query)) || 
+        (m.caption && m.caption.toLowerCase().includes(query)) || 
+        (m.location && m.location.toLowerCase().includes(query))
       );
+
+      if (filtered.length === 0) {
+        container.innerHTML = '<div style="grid-column: 1/-1; text-align: center; color: var(--text-muted); padding: 2rem;">No matching memories found.</div>';
+        return;
+      }
 
       container.innerHTML = filtered.map((item) => {
         const globalIdx = MEMORIES_DATA.findIndex(x => x.id === item.id);
-        const mediaTag = item.mediaType === 'video'
-          ? `<video src="${item.image}" muted preload="metadata"></video>`
-          : `<img src="${item.image}" alt="${item.title}">`;
+        const isVideo = item.mediaType === 'video';
 
         return `
-          <div class="gallery-item polaroid-card" onclick="openLightbox(${globalIdx})">
-            ${mediaTag}
-            <div class="polaroid-caption">${item.title}</div>
-            <div style="font-size: 0.8rem; text-align: center; color: var(--text-muted); margin-top: 4px;">
-              ${item.location} • ${item.date}
-            </div>
+          <div class="gallery-thumb-card" onclick="openLightbox(${globalIdx})" style="position: relative; aspect-ratio: 1 / 1; border-radius: 8px; overflow: hidden; background: #111; cursor: pointer; border: 2px solid var(--border-color, #222);">
+            ${isVideo
+              ? `<video src="${item.image}" muted preload="metadata" style="width: 100%; height: 100%; object-fit: cover; pointer-events: none;"></video>
+                 <span style="position: absolute; top: 6px; right: 6px; background: rgba(0,0,0,0.65); color: #fff; font-size: 0.65rem; padding: 2px 5px; border-radius: 4px;"><i class="fa-solid fa-play"></i></span>`
+              : `<img src="${item.image}" alt="${item.title}" loading="lazy" style="width: 100%; height: 100%; object-fit: cover; display: block;">`
+            }
           </div>
         `;
       }).join('');
     }
 
+    // Full-screen Viewer (Lightbox)
     function openLightbox(index) {
       currentLightboxIndex = index;
       const mem = MEMORIES_DATA[index];
       if (!mem) return;
 
       const mediaWrapper = document.getElementById('lightbox-media-wrapper');
-      if (mem.mediaType === 'video') {
-        mediaWrapper.innerHTML = `<video controls autoplay src="${mem.image}" style="width:100%; max-height:60vh; background:#000; border-radius:6px;"></video>`;
-      } else {
-        mediaWrapper.innerHTML = `<img id="lightbox-img" src="${mem.image}" alt="Enlarged view">`;
+      if (mediaWrapper) {
+        if (mem.mediaType === 'video') {
+          mediaWrapper.innerHTML = `<video controls autoplay playsinline src="${mem.image}" style="max-width: 95vw; max-height: 70vh; border-radius: 8px; object-fit: contain;"></video>`;
+        } else {
+          mediaWrapper.innerHTML = `<img id="lightbox-img" src="${mem.image}" alt="Enlarged view" style="max-width: 95vw; max-height: 70vh; border-radius: 8px; object-fit: contain;">`;
+        }
       }
 
-      document.getElementById('lightbox-title').textContent = mem.title;
-      document.getElementById('lightbox-caption').textContent = `${mem.location} • ${mem.date} — "${mem.caption}"`;
-      document.getElementById('lightbox-tag').textContent = mem.category.toUpperCase();
-      document.getElementById('lightbox').classList.add('active');
+      const titleEl = document.getElementById('lightbox-title');
+      const captionEl = document.getElementById('lightbox-caption');
+      const tagEl = document.getElementById('lightbox-tag');
+
+      if (titleEl) titleEl.textContent = mem.caption || mem.title || 'Squad Memory';
+      if (captionEl) captionEl.textContent = `${mem.location || '@Room 301'} • ${mem.date}`;
+      if (tagEl) tagEl.textContent = (mem.category || 'Lore').toUpperCase();
+
+      const lb = document.getElementById('lightbox');
+      if (lb) lb.classList.add('active');
     }
 
     function closeLightbox(e) {
       if (!e || e.target.id === 'lightbox' || e.target.classList.contains('lightbox-close')) {
         const video = document.querySelector('#lightbox-media-wrapper video');
         if (video) video.pause();
-        document.getElementById('lightbox').classList.remove('active');
+        const lb = document.getElementById('lightbox');
+        if (lb) lb.classList.remove('active');
       }
     }
 
@@ -3052,5 +3211,16 @@ function renderFilmstrip() {
       }
     }
   </script>
+  <!-- Fullscreen Lightbox Modal -->
+<div id="gallery-lightbox" class="gallery-lightbox-modal" onclick="closeLightbox(event)">
+  <button class="lightbox-close-btn" onclick="closeLightbox()">&times;</button>
+  <div class="lightbox-content-wrapper" id="lightbox-media-container" onclick="event.stopPropagation()">
+    <!-- Media inserted dynamically -->
+  </div>
+  <div class="lightbox-details" onclick="event.stopPropagation()">
+    <p id="lightbox-caption-text" class="lightbox-caption"></p>
+    <p id="lightbox-meta-text" class="lightbox-meta"></p>
+  </div>
+</div>
 </body>
 </html>
